@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コンセプト | 那須ミッドシティホテル</title>
+  <meta name="description" content="那須塩原駅徒歩3分、無料駐車場完備。観光・出張・温泉巡りや周辺エリアへの移動に便利な、那須の拠点となるホテルです。">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://www.nasu-midcity.com/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "コンセプト"
+    }]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+      color: #2a2a2a;
+      line-height: 1.8;
+      background: #fafaf7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; transition: opacity .3s; }
+    a:hover { opacity: .7; }
+
+    :root {
+      --c-ink: #1e1e1c;
+      --c-text: #2a2a2a;
+      --c-bg: #fafaf7;
+      --c-accent: #1e4a36;
+      --c-accent2: #528c66;
+      --c-white: #ffffff;
+    }
+
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 40px; display: flex; justify-content: space-between; align-items: center;
+      transition: background .4s ease, padding .4s ease;
+    }
+    .header.scrolled {
+      background: rgba(255, 255, 255, .96); padding: 12px 40px; box-shadow: 0 2px 12px rgba(0, 0, 0, .05);
+    }
+    .logo-link { display: inline-block; }
+    .logo-img {
+      height: 48px; width: auto; transition: filter .4s ease; filter: brightness(0) invert(1);
+    }
+    .header.scrolled .logo-img { filter: none; }
+    
+    .nav { display: flex; gap: 32px; align-items: center; }
+    .nav a {
+      font-family: "Cormorant Garamond", serif; font-size: 15px; letter-spacing: .15em;
+      color: var(--c-white); position: relative; padding-bottom: 4px;
+    }
+    .nav a small {
+      display: block; font-family: "Noto Sans JP", sans-serif; font-size: 10px; letter-spacing: .15em; margin-top: 2px; opacity: .8;
+    }
+    .header.scrolled .nav a { color: var(--c-ink); }
+    
+    .btn-book {
+      background: var(--c-accent); color: var(--c-white) !important; padding: 12px 24px;
+      font-family: "Cormorant Garamond", serif; font-size: 14px; letter-spacing: .2em; border: 1px solid var(--c-accent); transition: all .3s;
+    }
+    .btn-book:hover { background: transparent; color: var(--c-accent) !important; }
+    .header.scrolled .btn-book { color: var(--c-white) !important; }
+    .header.scrolled .btn-book:hover { color: var(--c-accent) !important; }
+
+    /* ============================================
+       EDITORIAL DESIGN (Vertical Text & Parallax)
+       ============================================ */
+    .concept-hero-new {
+      height: 100vh;
+      min-height: 700px;
+      background-image: url('./spot-nasu.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* Parallax effect */
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .concept-hero-new::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+    }
+    .hero-v-text {
+      position: relative;
+      z-index: 2;
+      writing-mode: vertical-rl;
+      color: var(--c-white);
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      line-height: 2;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    .v-text-section {
+      padding: 160px 5%;
+      background: var(--c-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .v-text-container {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: "Noto Serif JP", serif;
+      color: var(--c-ink);
+      height: 480px; /* Fixed height for clean vertical alignment */
+    }
+    .v-title {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      margin-left: clamp(40px, 8vw, 100px); /* Push text to the left */
+      line-height: 1.5;
+      color: var(--c-accent);
+    }
+    .v-body {
+      font-size: clamp(14px, 1.5vw, 16px);
+      line-height: 2.8;
+      letter-spacing: 0.2em;
+      color: var(--c-text);
+      font-weight: 300;
+    }
+
+    .parallax-img {
+      height: 70vh;
+      min-height: 400px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+    .parallax-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.15);
+    }
+    .parallax-1 { background-image: url('./comfort.jpg'); }
+    .parallax-2 { background-image: url('./breakfast.jpg'); }
+    .parallax-3 { background-image: url('./shikanoyu.jpg'); }
+
+    /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer { background: #1a1a18; color: #aaa; padding: 80px 40px 32px; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+    .footer-logo-img { height: 42px; width: auto; margin-bottom: 24px; opacity: 0.9; filter: brightness(0) invert(1); }
+    .footer-info { font-size: 12.5px; line-height: 2; }
+    .footer h4 { font-family: "Cormorant Garamond", serif; font-size: 13px; letter-spacing: .3em; color: var(--c-white); margin-bottom: 20px; }
+    .footer ul li { list-style: none; font-size: 13px; margin-bottom: 10px; }
+    .copyright { max-width: 1200px; margin: 32px auto 0; font-size: 11px; letter-spacing: .15em; text-align: center; }
+
+    @media (max-width: 768px) {
+      .nav, .btn-book { display: none; }
+      .v-text-container { height: 380px; }
+      .parallax-img { background-attachment: scroll; /* Disable parallax on mobile for performance */ }
+      .concept-hero-new { background-attachment: scroll; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============== HEADER ============== -->
+  <header class="header" id="header">
+    <a href="index.html" class="logo-link">
+      <img src="sheader_logo.png" alt="那須ミッドシティホテル" class="logo-img">
+    </a>
+    <nav class="nav">
+      <a href="concept.html">CONCEPT<small>コンセプト</small></a>
+      <a href="index.html#rooms">ROOMS<small>客室</small></a>
+      <a href="index.html#breakfast">BREAKFAST<small>朝食</small></a>
+      <a href="index.html#onsen">ONSEN<small>温泉</small></a>
+      <a href="index.html#access">ACCESS<small>アクセス</small></a>
+    </nav>
+    <a href="#book" class="btn-book">BOOK NOW</a>
+  </header>
+
+  <!-- ============== CONCEPT HERO ============== -->
+  <section class="concept-hero-new">
+    <h1 class="hero-v-text">那須を動くための<br>拠点ホテル</h1>
+  </section>
+
+  <!-- ============== STORY 1 ============== -->
+  <section class="v-text-section fade-in">
+    <div class="v-text-container">
+      <h2 class="v-title">便利なホテルからの脱却</h2>
+      <p class="v-body">
+        「便利なビジネスホテル」という<br>
+        従来の枠組みでは、<br>
+        那須の本当の滞在価値は測れない。<br><br>
+        出発の準備を整え、疲れを癒し、<br>
+        翌日の活力を生み出す場所。<br>
+        私たちは自らを、<br>
+        那須滞在の行動を最適化する<br>
+        「拠点ホテル」と再定義した。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== PARALLAX 1 ============== -->
+  <div class="parallax-img parallax-1"></div>
+
+  <!-- ============== STORY 2 ============== -->
+  <section class="v-text-section fade-in">
+    <div class="v-text-container">
+      <h2 class="v-title">圧倒的な機動力</h2>
+      <p class="v-body">
+        新幹線を降りてわずか三分。<br>
+        重い荷物を置き、身軽になってから<br>
+        高原へと向かう。<br><br>
+        到着から移動までのロスのなさは、<br>
+        そのまま滞在の「ゆとり」となる。<br><br>
+        無料の平置き駐車場は、<br>
+        車で動く人たちにとっての<br>
+        フットワークを軽くする<br>
+        最強の中継地点となる。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== PARALLAX 2 ============== -->
+  <div class="parallax-img parallax-2"></div>
+
+  <!-- ============== STORY 3 ============== -->
+  <section class="v-text-section fade-in">
+    <div class="v-text-container">
+      <h2 class="v-title">朝から動き出すために</h2>
+      <p class="v-body">
+        地域野菜や那須御養卵を取り入れた<br>
+        無料の朝食バイキング。<br><br>
+        これは単なるサービスではなく、<br>
+        那須の素晴らしい朝をいち早く体験し、<br>
+        一日をエネルギッシュに動き出すための<br>
+        「出発の準備」である。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== PARALLAX 3 ============== -->
+  <div class="parallax-img parallax-3"></div>
+
+  <!-- ============== STORY 4 ============== -->
+  <section class="v-text-section fade-in">
+    <div class="v-text-container">
+      <h2 class="v-title">名湯を巡る拠点として</h2>
+      <p class="v-body">
+        那須温泉郷、板室温泉、塩原温泉郷。<br>
+        周囲に点在する性質の異なる名湯たち。<br><br>
+        館内に温泉施設を設けない代わりに、<br>
+        周辺の温泉を深く楽しむための<br>
+        案内人として機能する。<br><br>
+        ここから、那須を動く。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <img src="sheader_logo.png" alt="那須ミッドシティホテル" class="footer-logo-img">
+        <p class="footer-info">
+          〒329-3156<br>
+          栃木県那須塩原市方京1-1-10<br>
+          TEL: 0287-67-1400<br>
+          JR那須塩原駅西口 徒歩3分
+        </p>
+      </div>
+      <div>
+        <h4>STAY</h4>
+        <ul>
+          <li><a href="index.html#rooms">客室</a></li>
+          <li><a href="index.html#breakfast">朝食</a></li>
+          <li><a href="#book">宿泊プラン</a></li>
+          <li><a href="#book">ご予約</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>EXPERIENCE</h4>
+        <ul>
+          <li><a href="index.html#onsen">温泉ガイド</a></li>
+          <li><a href="#">観光ガイド</a></li>
+          <li><a href="#">館内サービス</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="index.html#access">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 NASU MIDCITY HOTEL. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+
+    // Fade-in animation
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

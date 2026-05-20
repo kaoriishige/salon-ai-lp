@@ -1,0 +1,12 @@
+{
+  "fileSize": 768064,
+  "riffHeader": "RIFF",
+  "waveHeader": "WAVE",
+  "fmtHeader": "fmt ",
+  "formatType": "PCM (Non-compressed)",
+  "channels": "Mono",
+  "sampleRateHz": 48000,
+  "bitsPerSample": 16,
+  "byteRate": 96000,
+  "durationSeconds": 8.000208333333333
+}

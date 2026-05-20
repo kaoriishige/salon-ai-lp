@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>那須ミッドシティホテル | 那須を動くための拠点ホテル</title>
+  <meta name="description" content="那須塩原駅徒歩3分、無料駐車場完備。観光の出張・温泉巡りや周辺エリアへの移動に便利な、那須の拠点となるホテルです。">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&amp;family=Noto+Serif+JP:wght@300;400;500;600&amp;family=Noto+Sans+JP:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+      color: #2a2a2a;
+      line-height: 1.8;
+      background: #fafaf7;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity .3s;
+    }
+
+    a:hover {
+      opacity: .7;
+    }
+
+    /* ============================================
+       COLOR SYSTEM
+       ============================================ */
+    :root {
+      --c-ink: #1e1e1c;
+      --c-text: #2a2a2a;
+      --c-sub: #707070;
+      --c-line: #d8d4cc;
+      --c-bg: #fafaf7;
+      --c-bg2: #f0ece3;
+      --c-accent: #1e4a36;
+      /* ロゴに合わせた深いグリーン */
+      --c-accent2: #528c66;
+      /* アクセントの若草色 */
+      --c-white: #ffffff;
+    }
+
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background .4s ease, padding .4s ease;
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, .96);
+      padding: 12px 40px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .05);
+    }
+
+    .logo-link {
+      display: inline-block;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      transition: filter .4s ease;
+      filter: brightness(0) invert(1);
+    }
+
+    .header.scrolled .logo-img {
+      filter: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 15px;
+      letter-spacing: .15em;
+      color: var(--c-white);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav a small {
+      display: block;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 10px;
+      letter-spacing: .15em;
+      margin-top: 2px;
+      opacity: .8;
+    }
+
+    .header.scrolled .nav a {
+      color: var(--c-ink);
+    }
+
+    .btn-book {
+      background: var(--c-accent);
+      color: var(--c-white) !important;
+      padding: 12px 24px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 14px;
+      letter-spacing: .2em;
+      border: 1px solid var(--c-accent);
+      transition: all .3s;
+    }
+
+    .btn-book:hover {
+      background: transparent;
+      color: var(--c-accent) !important;
+      opacity: 1;
+    }
+
+    .header.scrolled .btn-book {
+      color: var(--c-white) !important;
+    }
+
+    .header.scrolled .btn-book:hover {
+      color: var(--c-accent) !important;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-white);
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('./spot-nasu.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: zoomBg 12s ease-out forwards;
+    }
+
+    @keyframes zoomBg {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .25) 0%, rgba(0, 0, 0, .45) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 24px;
+      max-width: 920px;
+    }
+
+    .hero-tag {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 14px;
+      letter-spacing: .4em;
+      margin-bottom: 32px;
+      opacity: .9;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 300;
+      font-size: clamp(28px, 5vw, 56px);
+      line-height: 1.5;
+      letter-spacing: .08em;
+      margin-bottom: 28px;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, .3);
+    }
+
+    .hero-title strong {
+      font-weight: 500;
+      position: relative;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      letter-spacing: .12em;
+      line-height: 2;
+      margin-bottom: 48px;
+      opacity: .95;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 36px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 14px;
+      letter-spacing: .25em;
+      border: 1px solid var(--c-white);
+      color: var(--c-white);
+      background: transparent;
+      transition: all .3s;
+    }
+
+    .btn.primary {
+      background: var(--c-white);
+      color: var(--c-ink);
+    }
+
+    .btn:hover {
+      background: var(--c-accent);
+      border-color: var(--c-accent);
+      color: var(--c-white);
+      opacity: 1;
+    }
+
+    .btn.primary:hover {
+      background: var(--c-accent);
+      color: var(--c-white);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 11px;
+      letter-spacing: .3em;
+      color: var(--c-white);
+      writing-mode: vertical-rl;
+      opacity: .85;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--c-white);
+      margin: 16px auto 0;
+      animation: scrollDot 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDot {
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: .85;
+      }
+      50% {
+        transform: scaleY(0.4);
+        opacity: .3;
+      }
+    }
+
+    /* ============================================
+       COMMON SECTION
+       ============================================ */
+    section {
+      padding: 120px 40px;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .section-en {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      letter-spacing: .4em;
+      color: var(--c-accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-jp {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: .12em;
+      color: var(--c-ink);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-jp::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--c-accent2);
+      margin: 20px auto 0;
+    }
+
+    /* ============================================
+       CONCEPT
+       ============================================ */
+    .concept {
+      background: var(--c-bg);
+      text-align: center;
+    }
+
+    .concept-lead {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 300;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 2;
+      letter-spacing: .12em;
+      color: var(--c-ink);
+      margin: 0 auto 36px;
+      max-width: 860px;
+    }
+
+    .concept-lead em {
+      font-style: normal;
+      color: var(--c-accent);
+      font-weight: 500;
+      border-bottom: 1px solid var(--c-accent2);
+      padding-bottom: 2px;
+    }
+
+    .concept-text {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 2.2;
+      color: var(--c-sub);
+      text-align: left;
+    }
+
+    /* ============================================
+       FEATURES (4-grid)
+       ============================================ */
+    .features {
+      background: var(--c-bg2);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: var(--c-white);
+      padding: 40px 28px;
+      text-align: center;
+      border: 1px solid var(--c-line);
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .08);
+    }
+
+    .feature-num {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      letter-spacing: .3em;
+      color: var(--c-accent2);
+      margin-bottom: 16px;
+    }
+
+    .feature-icon {
+      font-size: 34px;
+      margin-bottom: 16px;
+      color: var(--c-accent);
+    }
+
+    .feature h3 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: .08em;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      color: var(--c-ink);
+    }
+
+    .feature p {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--c-sub);
+    }
+
+    /* ============================================
+       SPLIT SECTION (image + text)
+       ============================================ */
+    .split {
+      background: var(--c-bg);
+    }
+
+    .split-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .split.reverse .split-inner {
+      direction: rtl;
+    }
+
+    .split.reverse .split-inner>* {
+      direction: ltr;
+    }
+
+    .split-img img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .split-text .section-en {
+      text-align: left;
+    }
+
+    .split-text h2 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 400;
+      font-size: clamp(22px, 2.6vw, 30px);
+      letter-spacing: .1em;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: var(--c-ink);
+    }
+
+    .split-text h2 small {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      letter-spacing: .3em;
+      color: var(--c-accent);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .split-text p {
+      font-size: 14px;
+      line-height: 2.1;
+      color: var(--c-text);
+      margin-bottom: 20px;
+    }
+
+    .split-text .more {
+      display: inline-block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      letter-spacing: .25em;
+      color: var(--c-accent);
+      border-bottom: 1px solid var(--c-accent2);
+      padding-bottom: 4px;
+      margin-top: 16px;
+    }
+
+    /* ============================================
+       ACCESS
+       ============================================ */
+    .access {
+      background: var(--c-ink);
+      color: var(--c-white);
+      text-align: center;
+    }
+
+    .access .section-jp {
+      color: var(--c-white);
+    }
+
+    .access .section-en {
+      color: var(--c-accent2);
+    }
+
+    .access-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .access-item {
+      border: 1px solid rgba(255, 255, 255, .15);
+      padding: 40px 24px;
+    }
+
+    .access-item .label {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 12px;
+      letter-spacing: .3em;
+      color: var(--c-accent2);
+      margin-bottom: 16px;
+    }
+
+    .access-item .big {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 300;
+      font-size: 40px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .access-item .big em {
+      font-style: normal;
+      font-size: 60px;
+      color: var(--c-accent2);
+      font-weight: 500;
+    }
+
+    .access-item .desc {
+      font-size: 13px;
+      letter-spacing: .08em;
+      opacity: .8;
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       NEWS
+       ============================================ */
+    .news {
+      background: var(--c-bg);
+    }
+
+    .news-list {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 130px 100px 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--c-line);
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .news-item .date {
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: .1em;
+      color: var(--c-sub);
+    }
+
+    .news-item .tag {
+      font-size: 11px;
+      letter-spacing: .15em;
+      padding: 4px 10px;
+      background: var(--c-accent);
+      color: var(--c-white);
+      text-align: center;
+      display: inline-block;
+      justify-self: start;
+    }
+
+    .news-item .tag.event {
+      background: var(--c-accent2);
+    }
+
+    .news-item .title {
+      color: var(--c-ink);
+    }
+
+    /* ============================================
+       CTA
+       ============================================ */
+    .cta {
+      background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('./spot-nasu.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      text-align: center;
+      color: var(--c-white);
+      padding: 140px 40px;
+    }
+
+    .cta h2 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 300;
+      font-size: clamp(24px, 3.4vw, 38px);
+      letter-spacing: .12em;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .cta p {
+      font-size: 15px;
+      letter-spacing: .1em;
+      line-height: 2;
+      margin-bottom: 40px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      background: #1a1a18;
+      color: #aaa;
+      padding: 80px 40px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .footer-logo-img {
+      height: 42px;
+      width: auto;
+      margin-bottom: 24px;
+      opacity: 0.9;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-info {
+      font-size: 12.5px;
+      line-height: 2;
+    }
+
+    .footer h4 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      letter-spacing: .3em;
+      color: var(--c-white);
+      margin-bottom: 20px;
+    }
+
+    .footer ul li {
+      list-style: none;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-align: center;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 960px) {
+      .header {
+        padding: 14px 20px;
+      }
+
+      .header.scrolled {
+        padding: 10px 20px;
+      }
+
+      .nav,
+      .btn-book {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 8px;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 1.5px;
+        background: var(--c-white);
+        transition: background .3s;
+      }
+
+      .header.scrolled .menu-toggle span {
+        background: var(--c-ink);
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .split-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .split.reverse .split-inner {
+        direction: ltr;
+      }
+
+      .split-img img {
+        height: 280px;
+      }
+
+      .access-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .news-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 240px;
+        text-align: center;
+      }
+    }
+
+    /* ============================================
+       BASE HOTEL (EXTERIOR)
+       ============================================ */
+    .base-hotel {
+      padding: 120px 5%;
+      background: var(--c-white);
+    }
+    .base-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 80px;
+      align-items: center;
+    }
+    .base-img {
+      flex: 1.2;
+      position: relative;
+    }
+    .base-img img {
+      width: 100%;
+      height: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+    .base-text {
+      flex: 1;
+    }
+    .base-text h2 {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 32px;
+      color: var(--c-ink);
+    }
+    .base-text p {
+      font-size: 15px;
+      line-height: 2.2;
+      color: var(--c-text);
+      margin-bottom: 24px;
+      letter-spacing: 0.08em;
+    }
+    @media (max-width: 900px) {
+      .base-inner { flex-direction: column; gap: 40px; }
+    }
+
+    /* ============================================
+       AI CONCIERGE BANNER & FAB
+       ============================================ */
+    .ai-concierge-banner {
+      background: var(--c-accent); color: var(--c-white); padding: 100px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .ai-concierge-banner::before {
+      content: ''; position: absolute; top: -50%; left: -50%; right: -50%; bottom: -50%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 50%);
+      animation: pulseBg 6s infinite alternate; z-index: 0;
+    }
+    @keyframes pulseBg { 0% { transform: scale(0.8); } 100% { transform: scale(1.2); } }
+    .ai-banner-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .ai-icon-large {
+      width: 72px; height: 72px; background: rgba(255,255,255,0.1); border-radius: 50%;
+      display: flex; justify-content: center; align-items: center; margin: 0 auto 32px; border: 1px solid rgba(255,255,255,0.2);
+    }
+    .ai-icon-large svg { width: 32px; height: 32px; color: var(--c-white); opacity: 0.9; }
+    .ai-banner-content h2 { font-family: "Noto Serif JP", serif; font-size: clamp(24px, 3vw, 32px); font-weight: 300; margin-bottom: 24px; line-height: 1.5; }
+    .ai-banner-content h2 small { display: block; font-family: "Cormorant Garamond", serif; font-size: 14px; letter-spacing: 0.3em; margin-bottom: 12px; color: rgba(255,255,255,0.7); }
+    .ai-banner-content p { font-size: 15px; line-height: 2.2; letter-spacing: 0.08em; opacity: 0.85; margin-bottom: 32px; }
+
+    .ai-fab-container { position: fixed; bottom: 32px; right: 32px; z-index: 1000; }
+    .ai-fab {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--c-accent);
+      color: var(--c-white);
+      border: none;
+      cursor: pointer;
+      padding: 16px 28px;
+      border-radius: 60px;
+      box-shadow: 0 8px 32px rgba(30, 74, 54, 0.5), 0 0 0 0 rgba(30, 74, 54, 0.4);
+      animation: fabPulse 2.5s infinite;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .ai-fab:hover { transform: scale(1.05); }
+    .ai-fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .ai-fab-label {
+      font-family: "Noto Serif JP", serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    @keyframes fabPulse {
+      0%   { box-shadow: 0 8px 32px rgba(30,74,54,0.5), 0 0 0 0 rgba(30,74,54,0.5); }
+      60%  { box-shadow: 0 8px 32px rgba(30,74,54,0.5), 0 0 0 18px rgba(30,74,54,0); }
+      100% { box-shadow: 0 8px 32px rgba(30,74,54,0.5), 0 0 0 0 rgba(30,74,54,0); }
+    }
+    @media (max-width: 768px) { 
+      .ai-fab-container { bottom: 20px; right: 16px; }
+      .ai-fab { padding: 14px 20px; }
+      .ai-fab-label { font-size: 13px; }
+    }
+
+    .hero-ai-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: var(--c-white);
+      padding: 14px 28px;
+      border-radius: 60px;
+      cursor: pointer;
+      font-family: "Noto Serif JP", serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      backdrop-filter: blur(8px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .hero-ai-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+    .hero-ai-btn svg { width: 18px; height: 18px; }
+
+    /* ============================================
+       AI CONCIERGE MODAL
+       ============================================ */
+    .ai-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+      z-index: 2000; display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+    }
+    .ai-modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+    /* AI Chat Mode */
+    .ai-modal-content.ai-chat-mode {
+      background: var(--c-bg); width: 90%; max-width: 500px; border-radius: 24px;
+      display: flex; flex-direction: column;
+      max-height: 80vh; height: 600px; text-align: left;
+      position: relative;
+      transform: translateY(30px); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+    }
+    .ai-modal-overlay.active .ai-modal-content { transform: translateY(0); }
+    
+    .ai-modal-close {
+      position: absolute; top: 24px; right: 24px; background: none; border: none;
+      font-size: 28px; color: var(--c-text); cursor: pointer; opacity: 0.6; transition: opacity 0.3s;
+    }
+    .ai-modal-close:hover { opacity: 1; }
+
+    .ai-chat-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 24px 28px; border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: linear-gradient(135deg, var(--c-accent), #2a7a52);
+      border-radius: 24px 24px 0 0; color: var(--c-white);
+    }
+    .ai-chat-mode .ai-modal-close { color: var(--c-white); top: 20px; right: 20px; z-index: 10; }
+    .ai-chat-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); display: flex;
+      justify-content: center; align-items: center; flex-shrink: 0;
+    }
+    .ai-chat-avatar svg { width: 20px; height: 20px; color: var(--c-white); }
+    .ai-chat-name { font-family: "Noto Serif JP", serif; font-size: 15px; font-weight: 500; }
+    .ai-chat-status { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+    .ai-chat-status::before {
+      content: ''; display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; margin-right: 6px; vertical-align: middle;
+    }
+    .ai-chat-body { flex: 1; overflow-y: auto; padding: 24px 20px; scroll-behavior: smooth; background: #fafaf7; }
+    .ai-msg { display: flex; margin-bottom: 16px; animation: msgIn 0.4s ease; }
+    @keyframes msgIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .ai-msg-bot { justify-content: flex-start; }
+    .ai-msg-user { justify-content: flex-end; }
+    .ai-msg-bubble {
+      max-width: 80%; padding: 14px 18px; border-radius: 18px;
+      font-size: 14px; line-height: 1.8; letter-spacing: 0.04em;
+    }
+    .ai-msg-bot .ai-msg-bubble { background: #eef2ef; color: var(--c-ink); border-bottom-left-radius: 4px; border: 1px solid rgba(0,0,0,0.05); }
+    .ai-msg-user .ai-msg-bubble { background: var(--c-accent); color: var(--c-white); border-bottom-right-radius: 4px; }
+    
+    .ai-typing { display: flex; gap: 5px; padding: 14px 18px; background: #eef2ef; border-radius: 18px; border-bottom-left-radius: 4px; width: fit-content; }
+    .ai-typing span { width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent); opacity: 0.4; animation: tBounce 1.4s infinite; }
+    .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes tBounce { 0%,60%,100% { transform:translateY(0); opacity:0.4; } 30% { transform:translateY(-6px); opacity:1; } }
+    .ai-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .ai-chip {
+      padding: 8px 16px; border: 1px solid rgba(30,74,54,0.25); border-radius: 20px;
+      font-size: 12px; color: var(--c-accent); cursor: pointer; transition: all 0.2s;
+      background: transparent; font-family: "Noto Sans JP", sans-serif;
+    }
+    .ai-chip:hover { background: var(--c-accent); color: var(--c-white); border-color: var(--c-accent); }
+    .ai-chat-input-area {
+      padding: 16px 20px; border-top: 1px solid rgba(0,0,0,0.06);
+      display: flex; gap: 12px; align-items: center;
+      background: var(--c-white); border-radius: 0 0 24px 24px;
+    }
+    .ai-voice-btn {
+      width: 48px; height: 48px; border-radius: 50%; background: var(--c-accent);
+      color: var(--c-white); border: none; cursor: pointer; display: flex;
+      justify-content: center; align-items: center; flex-shrink: 0; transition: transform 0.2s;
+    }
+    .ai-voice-btn:hover { transform: scale(1.08); }
+    .ai-voice-btn.listening { animation: vPulse 1.5s infinite; }
+    @keyframes vPulse { 0%{box-shadow:0 0 0 0 rgba(30,74,54,0.5)} 70%{box-shadow:0 0 0 14px rgba(30,74,54,0)} 100%{box-shadow:0 0 0 0 rgba(30,74,54,0)} }
+    .ai-voice-btn svg { width: 22px; height: 22px; }
+    .ai-tinput-wrap { flex: 1; display: flex; gap: 8px; align-items: center; }
+    .ai-tinput-wrap input {
+      flex: 1; padding: 12px 16px; border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 24px; font-size: 14px; font-family: "Noto Sans JP", sans-serif;
+      outline: none; transition: border-color 0.3s;
+    }
+    .ai-tinput-wrap input:focus { border-color: var(--c-accent); }
+    .ai-tinput-wrap button {
+      padding: 10px 20px; background: var(--c-accent); color: var(--c-white);
+      border: none; border-radius: 24px; font-size: 13px;
+      font-family: "Noto Sans JP", sans-serif; cursor: pointer; white-space: nowrap;
+    }
+    .ai-tinput-wrap button:hover { background: #2a7a52; }
+
+    /* Select UI Toggle */
+    .voice-toggle-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.8);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      font-family: inherit;
+      outline: none;
+    }
+    .voice-toggle-btn.active {
+      background: var(--c-white);
+      border-color: var(--c-white);
+      color: var(--c-accent);
+    }
+
+    @media (max-width: 768px) {
+      .ai-modal-content.ai-chat-mode { width: 95%; height: 90vh; max-height: 90vh; border-radius: 16px; }
+      .ai-chat-header { padding: 18px 20px; border-radius: 16px 16px 0 0; }
+      .ai-chat-input-area { border-radius: 0 0 16px 16px; padding: 12px 16px; }
+    }
+
+    /* ============================================
+       AI LIVE AVATAR (Nasu Mascot "Mori-Nasu-chan" 役)
+       ============================================ */
+    .ai-live-avatar {
+      position: relative;
+      width: 92px;  /* もりなすちゃんがハッキリ見えるよう92pxに大幅サイズアップ！ */
+      height: 92px; /* もりなすちゃんがハッキリ見えるよう92pxに大幅サイズアップ！ */
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(155, 89, 182, 0.45); /* もりなすちゃんを引き立てるリッチな紫シャドー */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      animation: avatarFloat 2.5s ease-in-out infinite alternate;
+      border: 3px solid rgba(155, 89, 182, 0.7); /* 高級感あふれる紫のゴールド縁 */
+      margin-right: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .ai-live-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    @keyframes avatarFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    /* 喋っているとき（リップシンク連動）：可愛くピコピコバウンス＆左右にゆらゆらスイング */
+    .ai-live-avatar.is-speaking {
+      animation: avatarFloat 2.5s ease-in-out infinite alternate, avatarBounceSpeak 0.7s ease-in-out infinite;
+      border-color: rgba(155, 89, 182, 0.85);
+      box-shadow: 0 4px 20px rgba(155, 89, 182, 0.6);
+    }
+    
+    @keyframes avatarBounceSpeak {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.06) rotate(-4deg); }
+      50% { transform: scale(0.96) rotate(3deg); }
+      75% { transform: scale(1.03) rotate(-2deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============== HEADER ============== -->
+  <header class="header scrolled" id="header">
+    <a href="#" class="logo-link">
+      <img src="sheader_logo.png" alt="那須ミッドシティホテル" class="logo-img">
+    </a>
+    <nav class="nav">
+      <a href="#concept">CONCEPT<small>コンセプト</small></a>
+      <a href="#rooms">ROOMS<small>客室</small></a>
+      <a href="#breakfast">BREAKFAST<small>朝食</small></a>
+      <a href="#onsen">ONSEN<small>温泉</small></a>
+      <a href="#access">ACCESS<small>アクセス</small></a>
+    </nav>
+    <a href="#book" class="btn-book">BOOK NOW</a>
+    <button class="menu-toggle"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-tag">A Base Hotel for Exploring Nasu</p>
+      <h1 class="hero-title">
+        那須塩原駅、徒歩<strong>3</strong>分。<br>
+        ここから、<strong>那須を動く</strong>。
+      </h1>
+      <p class="hero-sub">
+        那須塩原駅徒歩3分、無料駐車場完備。<br>
+        観光の出張・温泉巡りや周辺エリアへの移動に便利な、<br>
+        那須の拠点となるホテルです。
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn primary">BOOK NOW &nbsp;宿泊予約</a>
+        <a href="#access" class="btn">ACCESS &nbsp;アクセス</a>
+      </div>
+      <div style="text-align:center;">
+        <button class="hero-ai-btn ai-fab" style="font-size:14px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+          AIコンシェルジュに話しかける
+        </button>
+      </div>
+    </div>
+    <div class="scroll-indicator">SCROLL</div>
+  </section>
+
+  <!-- ============== EXTERIOR / BASE ============== -->
+  <section class="base-hotel" id="about">
+    <div class="base-inner">
+      <div class="base-img">
+        <img src="./midcityhotel.jpg" alt="那須ミッドシティホテル外観">
+      </div>
+      <div class="base-text">
+        <p class="section-en" style="text-align:left;">OUR HOTEL</p>
+        <h2>那須を繋ぐ、<br>ただひとつの拠点へ。</h2>
+        <p>
+          新幹線の改札を抜ければ、そこはもう那須への入り口。<br>
+          那須塩原駅前という圧倒的な利便性と、車移動を力強く支える広大な無料駐車場を備えています。
+        </p>
+        <p>
+          那須高原の豊かな自然、歴史ある温泉郷、そしてビジネスの中心地へ。<br>
+          観光の出張・温泉巡りなど、あなたのあらゆる目的をシームレスに繋ぐ「ベースキャンプ」がここにあります。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CONCEPT ============== -->
+  <section class="concept" id="concept">
+    <div class="section-head">
+      <p class="section-en">CONCEPT</p>
+      <h2 class="section-jp">那須を、動くための拠点へ</h2>
+    </div>
+    <p class="concept-lead">
+      便利なビジネスホテルではなく、<br>
+      <em>「那須を動くための拠点ホテル」</em>へ。
+    </p>
+    <p class="concept-text">
+      那須塩原駅徒歩3分は、ただの「駅近」ではありません。
+      新幹線で東京から70分、降りてすぐに那須を動き出せる<strong>機動力</strong>です。
+      無料駐車場は「お得」ではなく、車移動の<strong>拠点</strong>。
+      朝食は「無料サービス」ではなく、那須の朝を味わう<strong>地域体験</strong>。
+      温泉案内は弱点の補完ではなく、周辺の名湯を巡る<strong>アクティブの導線設計</strong>です。
+      すべてが、那須という土地を最大限に楽しむための装置として、ひとつにつながっています。
+    </p>
+    <div style="text-align: center; margin-top: 48px;">
+      <a class="btn primary" href="/concept" style="background: var(--c-accent); color: var(--c-white); border: none;">VIEW FULL CONCEPT &nbsp;コンセプトの詳細を見る</a>
+    </div>
+  </section>
+
+  <!-- ============== FEATURES ============== -->
+  <section class="features">
+    <div class="section-head">
+      <p class="section-en">FEATURE</p>
+      <h2 class="section-jp">選ばれる、4つの理由</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <p class="feature-num">01</p>
+        <div class="feature-icon">🚉</div>
+        <h3>那須塩原駅<br>徒歩3分</h3>
+        <p>新幹線到着後、最短で那須エリアへ。チェックイン前後の身軽な行動を可能にします。</p>
+      </div>
+      <div class="feature">
+        <p class="feature-num">02</p>
+        <div class="feature-icon">🚗</div>
+        <h3>無料駐車場<br>完備</h3>
+        <p>車で来ても、ここを起点に。那須高原・板室・塩原温泉郷へ自由に動ける拠点です。</p>
+      </div>
+      <div class="feature">
+        <p class="feature-num">03</p>
+        <div class="feature-icon">🍳</div>
+        <h3>地域を味わう<br>無料朝食</h3>
+        <p>那須御養卵の特別な卵かけご飯や地元野菜、焼きたてパン。朝から那須を動き出すための、地域体験です。</p>
+      </div>
+      <div class="feature">
+        <p class="feature-num">04</p>
+        <div class="feature-icon">♨️</div>
+        <h3>温泉巡りの<br>ベースキャンプ</h3>
+        <p>那須・塩原・板室の名湯までスグ。日帰り温泉案内付きで、滞在中の動きを設計します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ROOMS ============== -->
+  <section class="split" id="rooms">
+    <div class="split-inner">
+      <div class="split-img">
+        <img src="./comfort.jpg" alt="シモンズベッドを備えた客室">
+      </div>
+      <div class="split-text">
+        <p class="section-en" style="text-align:left;">ROOMS</p>
+        <h2><small>客室</small>翌日のための、確かな休息。</h2>
+        <p>
+          全室<strong>シモンズベッド</strong>採用。個別空調、防音ペアガラス、幅2mのワイドデスク。
+          観光で歩き疲れた一日も、出張の前夜も、しっかり休めるための機能を客室に集約しました。
+        </p>
+        <p>
+          全室ユニットバスのため、お風呂はあえて温泉案内と組み合わせ、<br>
+          客室を「休む場所」、温泉を「楽しむ場所」として明確に分けています。
+        </p>
+        <a href="#" class="more">View Rooms ➔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== BREAKFAST ============== -->
+  <section class="split reverse" id="breakfast">
+    <div class="split-inner">
+      <div class="split-img">
+        <img src="./breakfast.jpg" alt="無料朝食バイキング">
+      </div>
+      <div class="split-text">
+        <p class="section-en" style="text-align:left;">BREAKFAST</p>
+        <h2><small>朝食</small>那須の朝を、いただく。</h2>
+        <p>
+          那須御養卵の特別な卵かけご飯、地元野菜のサラダ、焼き立てのパン。
+          栃木県産のお米と味噌汁。地域の食材を中心にした朝食バイキングを<strong>無料</strong>でご用意しています。
+        </p>
+        <p>
+          早朝から那須を動き出す方のために、朝6:30よりオープン。<br>
+          観光出発の朝を、ここから始めてください。
+        </p>
+        <a href="#" class="more">View Breakfast ➔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ONSEN ============== -->
+  <section class="split" id="onsen">
+    <div class="split-inner">
+      <div class="split-img">
+        <img src="./shikanoyu.jpg" alt="那須の温泉">
+      </div>
+      <div class="split-text">
+        <p class="section-en" style="text-align:left;">ONSEN GUIDE</p>
+        <h2><small>温泉ガイド</small>名湯を、巡る拠点。</h2>
+        <p>
+          那須温泉郷、板室温泉、塩原温泉郷。
+          車で15分〜40分の圏内に、性質の異なる名湯が点在しています。
+          当ホテルでは、それぞれの温泉の<strong>泉質・所要時間・日帰り入浴料金</strong>をまとめた
+          独自の温泉ガイドをご用意しています。
+        </p>
+        <p>
+          フロントでのご相談や館内QRからのデジタル案内にも対応。<br>
+          「次はどこへ？」をスムーズに設計します。
+        </p>
+        <a href="#" class="more">View Onsen Guide ➔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== AI CONCIERGE BANNER ============== -->
+  <section class="ai-concierge-banner">
+    <div class="ai-banner-content">
+      <div class="ai-icon-large">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+        </svg>
+      </div>
+      <h2><small>VOICE AI CONCIERGE</small>話しかけるだけで、<br>那須の旅をパーソナライズ。</h2>
+      <p>
+        「明日の朝食は何時から？」「車で30分以内に行けるおすすめの温泉は？」<br>
+        那須ミッドシティホテルのコンシェルジュAIが、あなたの声による質問にいつでもお答えします。<br>
+        どんな些細なことでも、お気軽にお声がけください。
+      </p>
+      <a href="#" class="btn primary ai-fab" style="background: var(--c-white); color: var(--c-accent); border: none; font-weight: 500;">AIに相談する</a>
+    </div>
+  </section>
+
+  <!-- ============== ACCESS ============== -->
+  <section class="access" id="access">
+    <div class="section-head">
+      <p class="section-en">ACCESS</p>
+      <h2 class="section-jp">那須塩原駅、目の前。</h2>
+    </div>
+    <div class="access-grid">
+      <div class="access-item">
+        <p class="label">BY SHINKANSEN</p>
+        <p class="big">徒歩<em>3</em>分</p>
+        <p class="desc">JR那須塩原駅西口より<br>東京駅から新幹線で約70分</p>
+      </div>
+      <div class="access-item">
+        <p class="label">BY CAR</p>
+        <p class="big"><em>10</em>分</p>
+        <p class="desc">東北自動車道<br>黒磯板室ICより約10分</p>
+      </div>
+      <div class="access-item">
+        <p class="label">PARKING</p>
+        <p class="big">無料</p>
+        <p class="desc">無料駐車場完備<br>那須エリア観光の拠点に</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== NEWS ============== -->
+  <section class="news">
+    <div class="section-head">
+      <p class="section-en">NEWS</p>
+      <h2 class="section-jp">お知らせ</h2>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="date">2026.05.10</span>
+        <span class="tag">PLAN</span>
+        <span class="title">那須高原ハイシーズン特別プラン受付開始のお知らせ</span>
+      </div>
+      <div class="news-item">
+        <span class="date">2026.04.22</span>
+        <span class="tag event">EVENT</span>
+        <span class="title">温泉巡りガイド（2026年版）を館内QRより公開しました</span>
+      </div>
+      <div class="news-item">
+        <span class="date">2026.04.01</span>
+        <span class="tag">PLAN</span>
+        <span class="title">ビジネス・ファミリー・観光プラン、リニューアル予約スタート</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CTA ============== -->
+  <section class="cta" id="book">
+    <h2>那須を、動き始めよう。</h2>
+    <p>
+      那須塩原駅徒歩3分の拠点ホテルから、<br>
+      あなただけの那須の楽しみ方が始まります。
+    </p>
+    <div class="hero-ctas">
+      <a href="#" class="btn primary">BOOK NOW &nbsp;ご予約はこちら</a>
+      <a href="#" class="btn">CONTACT &nbsp;お問い合わせ</a>
+    </div>
+  </section>
+
+  <!-- ============== AI CONCIERGE FAB ============== -->
+  <div class="ai-fab-container">
+    <button class="ai-fab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" y1="19" x2="12" y2="22"></line>
+      </svg>
+      <span class="ai-fab-label">AIコンシェルジュに相談する</span>
+    </button>
+  </div>
+
+  <!-- ============== AI CONCIERGE MODAL ============== -->
+  <div class="ai-modal-overlay" id="aiModal">
+    <div class="ai-modal-content ai-chat-mode">
+      <button class="ai-modal-close" id="aiModalClose">×</button>
+      <div class="ai-chat-header">
+        <!-- 動く可愛いナス型AIキャラクターアバター（もりなすちゃん 役） -->
+        <div class="ai-live-avatar" id="aiLiveAvatar">
+          <img src="nasu_avatar.png" alt="もりなすちゃん" onerror="this.src='sheader_logo.png'">
+        </div>
+        <div style="flex: 1;">
+          <div class="ai-chat-name" id="aiChatName">もりなすちゃん (AIコンシェルジュ)</div>
+          <div class="ai-chat-status" id="aiChatStatus">オンライン</div>
+        </div>
+        <!-- 消音と言語切替ボタンの統合ヘッダーコントロール -->
+        <div style="display: flex; align-items: center; gap: 12px; margin-right: 25px;">
+          <!-- 消音ボタン -->
+          <button id="aiMuteBtn" title="消音切替" style="background:none; border:none; color:#fff; cursor:pointer; padding:5px; display:flex; align-items:center; justify-content:center; opacity:0.8; transition:opacity 0.2s; outline:none;">
+            <svg id="muteIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+          <!-- 言語切り替えトグルボタン -->
+          <button id="aiLangBtn" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; font-family: inherit; transition: background 0.2s; outline:none;">
+            English
+          </button>
+        </div>
+      </div>
+      <!-- プレミアム音声選択UI (女性・男性) -->
+      <div style="background: #1b3a2e; padding: 10px 20px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <!-- 性別選択はマスコットキャラクター用に非表示化し、声質選択のみをスマートに提供 -->
+        <div style="display: none; align-items: center; gap: 12px;">
+          <span id="genderLabelEl" style="color:rgba(255,255,255,0.7); font-size:12px; letter-spacing:0.1em; min-width:35px;">性別</span>
+          <div style="display:flex; gap:8px;">
+            <button id="voiceFemaleBtn" class="voice-toggle-btn active" onclick="setGender('female', this)">👩 女性</button>
+            <button id="voiceMaleBtn" class="voice-toggle-btn" onclick="setGender('male', this)">👨 男性</button>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span id="voiceLabelEl" style="color:rgba(255,255,255,0.7); font-size:12px; letter-spacing:0.1em; min-width:35px;">声質</span>
+          <select id="voiceSelect" onchange="updateVoice(this.value)" style="flex: 1; background: #0c1a15; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 4px; font-size: 13px; outline: none; cursor: pointer; font-family: inherit;">
+            <!-- スクリプトによって動的に選択肢が挿入されます -->
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+          <span id="speedLabelEl" style="color:rgba(255,255,255,0.7); font-size:12px; letter-spacing:0.1em; min-width:35px;">速度</span>
+          <select id="voiceSpeedSelect" onchange="updateVoiceSpeed(this.value)" style="flex: 1; background: #0c1a15; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 4px; font-size: 13px; outline: none; cursor: pointer; font-family: inherit;">
+            <option value="1.0" id="optSpeedNormal">普通 (1.0x)</option>
+            <option value="1.25" id="optSpeedFast">早い (1.25x)</option>
+            <option value="1.5" id="optSpeedFastest">最速 (1.5x)</option>
+          </select>
+        </div>
+      </div>
+      <div class="ai-chat-body" id="aiChatBody">
+        <div id="aiChatMessages"></div>
+      </div>
+      <div class="ai-chat-input-area">
+        <button class="ai-voice-btn" id="aiVoiceBtn" title="音声で質問">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+        </button>
+        <div class="ai-tinput-wrap">
+          <input type="text" id="aiTextInput" placeholder="テキストで質問する...">
+          <button id="aiSendBtn">送信</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <img src="sheader_logo.png" alt="那須ミッドシティホテル" class="footer-logo-img">
+        <p class="footer-info">
+          〒329-3156<br>
+          栃木県那須塩原市方京1-1-10<br>
+          TEL: 0287-67-1400<br>
+          JR那須塩原駅西口 徒歩3分
+        </p>
+      </div>
+      <div>
+        <h4>STAY</h4>
+        <ul>
+          <li><a href="#rooms">客室</a></li>
+          <li><a href="#breakfast">朝食</a></li>
+          <li><a href="#book">宿泊プラン</a></li>
+          <li><a href="#book">ご予約</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>EXPERIENCE</h4>
+        <ul>
+          <li><a href="#onsen">温泉ガイド</a></li>
+          <li><a href="#">観光ガイド</a></li>
+          <li><a href="#">館内サービス</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 NASU MIDCITY HOTEL. All Rights Reserved.</p>
+  </footer>
+
+  <script src="ai-concierge-front.js?v=2.0.1"></script>
+</body>
+</html>

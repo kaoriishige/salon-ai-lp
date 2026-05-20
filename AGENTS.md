@@ -1,0 +1,24 @@
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
+
+# Nasumid AI Concierge Development Rules
+
+## 1. Netlify Build & Deployment Config
+* **Base Directory**: Must be configured as `Desktop/nasumid` in Netlify dashboard because the Git repository contains the nested directories.
+* **netlify.toml Settings**:
+  - `command = "npm run build"`
+  - `publish = ".next"`
+  - Plugin `@netlify/plugin-nextjs` must be enabled.
+
+## 2. VOICEVOX & TTS Text Normalization
+* VOICEVOX will **fail/crash** if it receives half-width alphabets (e.g. `TKG`), currency symbols (`¥`), or raw hyphens inside numbers.
+* Always clean up text inside `/app/api/concierge/route.js` -> `optimizeTextForSpeech` before sending to TTS:
+  - Convert `TKG` to `たまごかけごはん` (Natural Japanese).
+  - Clean up `¥` and `,` (Commas) for prices.
+  - Convert `・` (Middle dots) to `、` (Reading pause).
+
+## 3. Mobile Responsive Layout for Avatar
+* Mobile viewport styling (`@media (max-width: 768px)`) for `.ai-live-avatar` must explicitly declare `flex-shrink: 0 !important` and `min-width: 50px !important` to prevent the flexbox from squishing and disappearing the avatar.
