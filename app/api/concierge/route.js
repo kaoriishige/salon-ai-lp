@@ -274,13 +274,17 @@ export async function POST(req) {
           audioContent = gcpData.audioContent;
           console.log("[Backend TTS] Success with GCP TTS");
         } else {
-          console.error("[Backend TTS] GCP TTS Error:", await gcpRes.text());
+          const errText = await gcpRes.text();
+          console.error("[Backend TTS] GCP TTS Error:", errText);
+          answerText = "【音声生成エラー】 " + errText;
         }
       } catch (gcpErr) {
         console.error("[Backend TTS] GCP TTS Exception:", gcpErr.message);
+        answerText = "【音声生成の通信エラー】 " + gcpErr.message;
       }
     } else {
       console.error("[Backend TTS] GCP_TTS_API_KEY is missing in .env");
+      answerText = "【システムエラー】GCP_TTS_API_KEYが.envに設定されていません。";
     }
 
     return NextResponse.json({
