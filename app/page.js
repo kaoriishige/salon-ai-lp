@@ -664,7 +664,7 @@ export default function Home() {
       <section className="split" id="menu">
         <div className="split-inner">
           <div className="split-img">
-            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="サロンのメニュー" />
+            <img src="/japanese_salon_menu.png" alt="サロンのメニュー" />
           </div>
           <div className="split-text">
             <p className="section-en">MENU</p>
@@ -683,7 +683,7 @@ export default function Home() {
       <section className="split reverse" id="before-after">
         <div className="split-inner">
           <div className="split-img">
-            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="劇的な変化" />
+            <img src="/before_after_hair.png" alt="劇的な変化" />
           </div>
           <div className="split-text">
             <p className="section-en">BEFORE / AFTER</p>
@@ -697,22 +697,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="ai-concierge-banner">
-        <div className="ai-banner-inner">
-          <div className="ai-banner-icon">
-            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--c-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-              <line x1="12" y1="19" x2="12" y2="22"></line>
-            </svg>
+      <section className="ai-concierge-banner" style={{ padding: '80px 20px', background: 'linear-gradient(to right, var(--c-bg2), #fff)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+          <div style={{ flex: '1 1 400px' }}>
+            <h2 className="ai-banner-title" style={{ textAlign: 'left', marginBottom: '16px', fontSize: 'clamp(24px, 4vw, 32px)' }}>
+              AIコンシェルジュが<br />予約を増やすお手伝いをします。
+            </h2>
+            <p className="ai-banner-text" style={{ textAlign: 'left', marginBottom: '24px', fontSize: '15px', lineHeight: '1.8' }}>
+              「私の髪質でも効果ある？」「どのメニューを選べばいい？」<br />
+              24時間いつでも、当サロンのAIコンシェルジュ「さくら」がお答えします。<br />
+              音声でもテキストでも、お気軽に質問してください。
+            </p>
+            <button onClick={openModal} className="btn primary" style={{ borderRadius: '30px', fontSize: '16px', padding: '16px 40px', boxShadow: '0 4px 15px rgba(229, 158, 178, 0.4)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+              AIに質問する
+            </button>
+            
+            <div style={{ marginTop: '40px', padding: '24px', background: '#fff', borderRadius: '12px', border: '1px solid var(--c-line)', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+              <p style={{ fontWeight: 'bold', marginBottom: '16px', color: 'var(--c-ink)', fontSize: '15px' }}>予約導線はどちらでも可能です。</p>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <a href="https://beauty.hotpepper.jp/slnH000000000/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#f5f5f5', color: '#333', border: '1px solid #ddd', flex: '1', minWidth: '200px', fontSize: '13px', textAlign: 'center', padding: '12px' }}>ホットペッパービューティーで予約</a>
+                <a href="#access" className="btn primary" style={{ flex: '1', minWidth: '200px', fontSize: '13px', textAlign: 'center', padding: '12px' }}>お店に直接予約</a>
+              </div>
+            </div>
           </div>
-          <h2 className="ai-banner-title">メニューや料金について、AIがお答えします</h2>
-          <p className="ai-banner-text">
-            「私の髪質でも効果ある？」「どのメニューを選べばいい？」<br />
-            24時間いつでも、当サロンのAIコンシェルジュ「さくら」がお答えします。<br />
-            音声でもテキストでも、お気軽に質問してください。
-          </p>
-          <button onClick={openModal} className="btn primary" style={{ borderRadius: '30px' }}>AIに質問する</button>
+          
+          <div style={{ flex: '1 1 300px', textAlign: 'center' }}>
+            <img src="/stylist_avatar.png" alt="AIコンシェルジュ さくら" style={{ maxWidth: '100%', height: 'auto', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.15))' }} />
+          </div>
         </div>
       </section>
 

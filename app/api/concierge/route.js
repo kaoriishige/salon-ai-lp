@@ -31,6 +31,7 @@ function optimizeTextForSpeech(text, isEnglish = false) {
 
   let optimized = text;
   // 1. Specific phrases/words (case-insensitive for half-width alphabets)
+  optimized = optimized.replace(/AI/gi, 'エーアイ');
   optimized = optimized.replace(/TKG/gi, 'たまごかけごはん');
   optimized = optimized.replace(/Wi-Fi/gi, 'ワイファイ');
   optimized = optimized.replace(/wifi/gi, 'ワイファイ');
@@ -208,7 +209,7 @@ export async function POST(req) {
       // RAG（上記辞書）にマッチしない場合の一律フォールバック（LLMへの問い合わせを完全遮断）
       // ==========================================
       if (!isPreciseMatch) {
-        answerText = "ご質問ありがとうございます。あいにくその件につきましては詳細なデータが手元にございません。客室の電話機より内線9番でフロントまでおかけいただければ、スタッフが喜んで詳しくご案内いたします。";
+        answerText = "ご質問ありがとうございます。その件につきましては、担当のスタイリストが直接ご案内いたします。お電話またはLINEよりお気軽にお問い合わせくださいませ。";
       }
     }
 
