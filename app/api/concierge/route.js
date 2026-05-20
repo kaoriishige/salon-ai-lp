@@ -238,20 +238,21 @@ export async function POST(req) {
 
     const speechReadyText = optimizeTextForSpeech(answerText, isEnglish);
 
+    // ==========================================
+    // 音声合成フェーズ（すべてGoogle Cloud TTSを使用）
+    // ==========================================
     let audioContent = null;
 
-    // textOnly=true の場合はTTS合成を完全スキップ
     if (textOnly) {
       return NextResponse.json({ answer: answerText, audio: null, mimeType: 'audio/mp3' }, { headers: corsHeaders });
     }
 
-    // 英語、または手動でGoogle音声（みどり）が選ばれた場合はGoogle Cloud TTSを使用
-    if ((isEnglish || isGoogleVoice) && process.env.GCP_TTS_API_KEY) {
-      console.log("[Backend TTS] Using Google Cloud TTS");
+    if (process.env.GCP_TTS_API_KEY) {
+      console.log("[Backend TTS] Using Google Cloud TTS for all voices");
       try {
         const gcpUrl = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${process.env.GCP_TTS_API_KEY}`;
         const languageCode = isEnglish ? 'en-US' : 'ja-JP';
-        const voiceName = isEnglish ? 'en-US-Neural2-F' : 'ja-JP-Neural2-B'; // 日本語の高音質女性ボイスはBが正解
+        const voiceName = isEnglish ? 'en-US-Neural2-F' : 'ja-JP-Wavenet-B'; // 日本語は安定のWavenet-Bに統一
         
         const gcpReq = {
           input: { text: speechReadyText },
@@ -279,33 +280,7 @@ export async function POST(req) {
         console.error("[Backend TTS] GCP TTS Exception:", gcpErr.message);
       }
     } else {
-      // VOICEVOX APIのみで音声合成（3キーローテーション）
-      let voicevoxSpeaker = 2;
-      const vLower = voice.toLowerCase();
-      if (vLower.includes('achernar') || vLower.includes('aoi')) voicevoxSpeaker = 8;
-      else if (vLower.includes('zephyr') || vLower.includes('mei')) voicevoxSpeaker = 10;
-
-      const voicevoxKeys = [
-        process.env.VOICEVOX_API_KEY_1,
-        process.env.VOICEVOX_API_KEY_2,
-        process.env.VOICEVOX_API_KEY_3,
-      ].filter(k => k && k.trim());
-
-      console.log("[Backend TTS] VOICEVOX Speaker ID: " + voicevoxSpeaker + " / Keys available: " + voicevoxKeys.length);
-
-      for (let i = 0; i < voicevoxKeys.length; i++) {
-        try {
-          console.log("[Backend TTS] Trying VOICEVOX Key #" + (i + 1));
-          audioContent = await getVoicevoxAudioV1(speechReadyText, voicevoxSpeaker, voicevoxKeys[i]);
-          console.log("[Backend TTS] Success with Key #" + (i + 1));
-          break; // 成功したらループを抜ける
-        } catch (err) {
-          console.error("[Backend TTS] Key #" + (i + 1) + " failed:", err.message);
-          if (i === voicevoxKeys.length - 1) {
-            console.error("[Backend TTS] All VOICEVOX keys exhausted");
-          }
-        }
-      }
+      console.error("[Backend TTS] GCP_TTS_API_KEY is missing in .env");
     }
 
     return NextResponse.json({

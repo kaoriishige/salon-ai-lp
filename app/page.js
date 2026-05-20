@@ -824,7 +824,7 @@ export default function Home() {
           <div className="ai-modal-header">
             <div className="ai-header-info">
               <div className={`ai-live-avatar ${isSpeaking ? 'speaking' : ''}`} style={{ background: 'transparent', overflow: 'hidden' }}>
-                <img src="/avatar.png" alt="さくら" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src="/stylist_avatar.png" alt="さくら" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div className="ai-header-text">
                 <h3>{UI_TEXT[currentLang].name}</h3>
