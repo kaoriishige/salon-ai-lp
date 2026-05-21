@@ -42,29 +42,18 @@ const UI_TEXT = {
 const VOICES_DICT = {
   ja: { 
     female: [
-      { value: 'ja-JP-Chirp3-HD-Aoede', label: 'さくら (明るく上品な妖精 🌸)' }, 
-      { value: 'ja-JP-Chirp3-HD-Achernar', label: 'あおい (しっとり落ち着いた妖精 💎)' }, 
-      { value: 'ja-JP-Chirp3-HD-Zephyr', label: 'めい (ふんわり愛らしい妖精 ❄️)' },
-      { value: 'ja-JP-Neural2-F', label: 'みどり (安定・高音質 🍀)' }
-    ], 
-    male: [
-      { value: 'ja-JP-Chirp3-HD-Aoede', label: 'さくら (明るく上品な妖精 🌸)' }, 
-      { value: 'ja-JP-Chirp3-HD-Achernar', label: 'あおい (しっとり落ち着いた妖精 💎)' }, 
-      { value: 'ja-JP-Chirp3-HD-Zephyr', label: 'めい (ふんわり愛らしい妖精 ❄️)' },
-      { value: 'ja-JP-Neural2-F', label: 'みどり (安定・高音質 🍀)' }
-    ] 
+      { value: 'ja-JP-Chirp3-HD-Aoede', label: 'さくら (明るく上品 🌸)' },
+      { value: 'ja-JP-Chirp3-HD-Zephyr', label: 'めい (ふんわり愛らしい ❄️)' }, 
+      { value: 'ja-JP-Chirp3-HD-Achernar', label: 'あおい (しっとり落ち着いた 💎)' }
+    ]
   },
   en: { 
     female: [
-      { value: 'en-US-Chirp3-HD-Aoede', label: 'Emily (Bright & friendly fairy 🎀)' }, 
+      { value: 'en-US-Chirp3-HD-Aoede', label: 'Emily (Bright & friendly 🎀)' }, 
       { value: 'en-US-Chirp3-HD-Kore', label: 'Sophia (Elegant & professional 👑)' },
-      { value: 'en-US-Neural2-F', label: 'Lily (Sweet & clear fairy 🌼)' }
-    ], 
-    male: [
-      { value: 'en-US-Chirp3-HD-Aoede', label: 'Emily (Bright & friendly fairy 🎀)' }, 
-      { value: 'en-US-Chirp3-HD-Kore', label: 'Sophia (Elegant & professional 👑)' },
-      { value: 'en-US-Neural2-F', label: 'Lily (Sweet & clear fairy 🌼)' }
-    ] 
+      { value: 'en-US-Neural2-F', label: 'Lily (Sweet & clear 🌼)' },
+      { value: 'en-US-Neural2-H', label: 'Mia (Soft & calm 🎵)' }
+    ]
   }
 };
 
@@ -83,7 +72,7 @@ export default function Home() {
     }
     return 'ja';
   });
-  const [currentGender, setCurrentGender] = useState('female');
+  const currentGender = 'female';
   const [currentVoice, setCurrentVoice] = useState('ja-JP-Chirp3-HD-Aoede');
   const [playbackRate, setPlaybackRate] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -271,6 +260,54 @@ export default function Home() {
     }
   };
 
+
+
+  const playGreetingStatic = async (lang = currentLang, voice = currentVoice) => {
+    stopSpeaking();
+    const mySessionId = activeTypingSessionRef.current;
+    setStatusText(lang === 'en' ? 'Speaking...' : 'お話し中...');
+
+    const greetingText = UI_TEXT[lang].greeting;
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const mp3Url = lang === 'en' ? `${origin}/greeting_en.mp3` : `${origin}/greeting_ja.mp3`;
+
+    setIsThinking(false);
+    setIsSpeaking(true);
+
+    const playPromise = playGcpTtsAudio(mp3Url).then(async (success) => {
+      // もし再生に失敗した場合は、動的にTTSをリクエストして再生する
+      if (!success && activeTypingSessionRef.current === mySessionId) {
+        console.warn("Static greeting play failed, requesting dynamic TTS fallback...");
+        try {
+          const res = await fetch('/api/concierge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: greetingText, voice, ttsOnly: true })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.audio && activeTypingSessionRef.current === mySessionId) {
+              await playGcpTtsAudio(data.audio);
+            }
+          }
+        } catch (err) {
+          console.error("Failed to fetch dynamic greeting TTS fallback:", err);
+        }
+      }
+    });
+
+    await Promise.all([
+      typewriteSentence(greetingText, mySessionId),
+      playPromise
+    ]);
+
+    if (activeTypingSessionRef.current === mySessionId) {
+      setMessages(prev => [...prev, { role: 'bot', text: greetingText }]);
+      setCurrentTypingText('');
+      setStatusText(UI_TEXT[lang].status);
+    }
+  };
+
   const handleToggleLanguage = () => {
     const nextLang = currentLang === 'ja' ? 'en' : 'ja';
     const nextVoice = VOICES_DICT[nextLang][currentGender][0].value;
@@ -286,18 +323,18 @@ export default function Home() {
     setMessages([]);
     
     setTimeout(() => {
-      speakLastAnswerDynamic(greeting, nextLang, nextVoice, true);
+      playGreetingStatic(nextLang, nextVoice);
     }, 150);
   };
 
   const playGcpTtsAudio = (audioData, rate = playbackRateRef.current) => {
     return new Promise((resolve) => {
-      if (isMutedRef.current || !audioRef.current || !audioData) { resolve(); return; }
+      if (isMutedRef.current || !audioRef.current || !audioData) { resolve(false); return; }
       
       let objectUrl = null;
       let isResolved = false;
 
-      const safeResolve = () => {
+      const safeResolve = (success = true) => {
         if (isResolved) return;
         isResolved = true;
         
@@ -309,7 +346,7 @@ export default function Home() {
         if (objectUrl) {
           try { URL.revokeObjectURL(objectUrl); } catch (e) {}
         }
-        resolve();
+        resolve(success);
       };
 
       try {
@@ -334,21 +371,24 @@ export default function Home() {
         
         setIsSpeaking(true);
         
-        audioRef.current.onended = safeResolve;
-        audioRef.current.onerror = safeResolve;
-        audioRef.current.onpause = safeResolve;
+        audioRef.current.onended = () => safeResolve(true);
+        audioRef.current.onerror = () => {
+          console.warn("Audio playback error occurred in playGcpTtsAudio");
+          safeResolve(false);
+        };
+        audioRef.current.onpause = () => safeResolve(true);
         
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise.catch((e) => {
             console.error("Audio playback failed:", e);
-            safeResolve();
+            safeResolve(false);
           });
         }
 
-        setTimeout(safeResolve, 15000);
+        setTimeout(() => safeResolve(false), 15000);
       } catch (e) {
-        safeResolve();
+        safeResolve(false);
       }
     });
   };
@@ -548,8 +588,7 @@ export default function Home() {
     unlockAudio();
     setIsModalOpen(true);
     if (messages.length === 0 && !currentTypingText) {
-      const greeting = UI_TEXT[currentLang].greeting;
-      speakLastAnswerDynamic(greeting, undefined, undefined, true);
+      playGreetingStatic(currentLang, currentVoice);
     }
   };
 
@@ -865,6 +904,8 @@ export default function Home() {
           </div>
 
           <div style={{ background: 'var(--c-bg2)', padding: '10px 24px', display: 'flex', flexDirection: 'column', gap: '8px', borderBottom: '1px solid var(--c-line)' }}>
+
+            
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <span style={{ color: 'var(--c-sub)', fontSize: '12px', letterSpacing: '0.1em', minWidth: '35px' }}>{UI_TEXT[currentLang].voiceLabel}</span>
               <select value={currentVoice} onChange={(e) => setCurrentVoice(e.target.value)} style={{ flex: 1, background: '#fff', color: 'var(--c-ink)', border: '1px solid var(--c-line)', padding: '6px 12px', borderRadius: '4px', fontSize: '13px', outline: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>

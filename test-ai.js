@@ -34,8 +34,8 @@ async function runTest() {
   const dummyEvent = {
     httpMethod: 'POST',
     body: JSON.stringify({
-      text: '朝食は何時からですか？',
-      voice: 'ja-JP-Chirp3-HD-Aoede', // 四国めたん
+      text: 'くせ毛でも大丈夫？',
+      voice: 'ja-JP-Chirp3-HD-Aoede',
       ttsOnly: false
     })
   };

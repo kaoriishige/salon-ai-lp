@@ -1,3 +1,0 @@
-module.exports=[18704,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(48193);a.n(d("[project]/Desktop/nasumid/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},55607,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(48193);a.n(d("[project]/Desktop/nasumid/node_modules/next/dist/client/components/builtin/global-error.js"))},29048,a=>{"use strict";a.i(18704);var b=a.i(55607);a.n(b)},70739,a=>{a.n(a.i(29048))}];
-
-//# sourceMappingURL=08_3_next_dist_client_components_builtin_global-error_0-r8~-k.js.map
