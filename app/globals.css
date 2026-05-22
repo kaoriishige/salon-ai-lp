@@ -36,17 +36,17 @@ a:hover {
 }
 
 /* ============================================
-   COLOR SYSTEM
+   COLOR SYSTEM (先進的・信頼感・ビジネステイスト)
    ============================================ */
 :root {
-  --c-ink: #4a3b3f;
-  --c-text: #594a4e;
-  --c-sub: #8c7a7e;
-  --c-line: #f5e6e8;
-  --c-bg: #fffcfd;
-  --c-bg2: #fff5f7;
-  --c-accent: #e59eb2;
-  --c-accent2: #d8839b;
+  --c-ink: #0f172a;       /* 深いネイビー（文字主色） */
+  --c-text: #334155;      /* スレートグレー（本文） */
+  --c-sub: #64748b;       /* ミディアムグレー */
+  --c-line: #e2e8f0;      /* 境界線 */
+  --c-bg: #f8fafc;        /* メイン背景（明るいブルーグレー） */
+  --c-bg2: #f1f5f9;       /* サブ背景 */
+  --c-accent: #2563eb;    /* アクセントカラー（ロイヤルブルー） */
+  --c-accent2: #0284c7;   /* セカンダリアクセント（シアン・スカイブルー） */
   --c-white: #ffffff;
 }
 
@@ -70,16 +70,16 @@ a:hover {
 .header.scrolled {
   background: rgba(255, 255, 255, .96);
   padding: 12px 40px;
-  box-shadow: 0 4px 20px rgba(229, 158, 178, .15);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, .1);
 }
 
 .logo-link {
   display: inline-block;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 24px;
-  font-weight: 600;
+  font-family: "Noto Serif JP", serif;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--c-ink);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 .header:not(.scrolled) .logo-link,
@@ -95,40 +95,41 @@ a:hover {
 }
 
 .nav a {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 15px;
-  letter-spacing: .15em;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .05em;
   color: var(--c-ink);
   position: relative;
   padding-bottom: 4px;
+  text-align: center;
 }
 
 .nav a small {
   display: block;
-  font-family: "Noto Sans JP", sans-serif;
   font-size: 10px;
-  letter-spacing: .15em;
+  letter-spacing: .05em;
   margin-top: 2px;
   opacity: .8;
+  font-weight: normal;
 }
 
 .btn-book {
   background: var(--c-accent);
   color: var(--c-white) !important;
   padding: 12px 24px;
-  font-family: "Cormorant Garamond", serif;
   font-size: 14px;
-  letter-spacing: .1em;
+  font-weight: 700;
+  letter-spacing: .05em;
   border: 1px solid var(--c-accent);
   border-radius: 30px;
   transition: all .3s;
-  box-shadow: 0 4px 15px rgba(229, 158, 178, 0.4);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
 }
 
 .btn-book:hover {
   background: var(--c-white);
   color: var(--c-accent) !important;
-  box-shadow: 0 6px 20px rgba(229, 158, 178, 0.6);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
   transform: translateY(-2px);
 }
 
@@ -154,7 +155,7 @@ a:hover {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1521590832167-7bfcfaa63749?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
   background-size: cover;
   background-position: center;
   transform: scale(1.05);
@@ -171,7 +172,7 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(229, 158, 178, .3) 0%, rgba(74, 59, 63, .6) 100%);
+  background: linear-gradient(to bottom, rgba(37, 99, 235, .2) 0%, rgba(15, 23, 42, .85) 100%);
 }
 
 .hero-content {
@@ -182,34 +183,35 @@ a:hover {
 }
 
 .hero-tag {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 16px;
-  letter-spacing: .4em;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .3em;
   margin-bottom: 24px;
   opacity: .95;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  color: var(--c-accent2);
 }
 
 .hero-title {
   font-family: "Noto Serif JP", serif;
-  font-weight: 300;
-  font-size: clamp(32px, 5vw, 56px);
-  line-height: 1.6;
-  letter-spacing: .1em;
+  font-weight: 700;
+  font-size: clamp(30px, 4.5vw, 52px);
+  line-height: 1.5;
+  letter-spacing: .05em;
   margin-bottom: 28px;
   text-shadow: 0 2px 16px rgba(0, 0, 0, .4);
 }
 
 .hero-title strong {
-  font-weight: 500;
-  color: #ffeff3;
+  font-weight: 800;
+  color: #60a5fa;
 }
 
 .hero-sub {
   font-size: 16px;
-  letter-spacing: .15em;
-  line-height: 2.2;
+  letter-spacing: .1em;
+  line-height: 2;
   margin-bottom: 48px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
@@ -226,7 +228,8 @@ a:hover {
   padding: 16px 40px;
   font-family: "Noto Sans JP", sans-serif;
   font-size: 14px;
-  letter-spacing: .15em;
+  font-weight: 700;
+  letter-spacing: .1em;
   border: 1px solid var(--c-white);
   border-radius: 40px;
   color: var(--c-white);
@@ -240,7 +243,7 @@ a:hover {
   background: var(--c-accent);
   border-color: var(--c-accent);
   color: var(--c-white);
-  box-shadow: 0 4px 15px rgba(229, 158, 178, 0.4);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
 }
 
 .btn:hover {
@@ -276,7 +279,7 @@ a:hover {
   background: var(--c-accent);
   border-color: var(--c-accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(229, 158, 178, 0.5);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 
 .hero-ai-btn svg {
@@ -297,9 +300,10 @@ section {
 }
 
 .section-en {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: 14px;
-  letter-spacing: .4em;
+  font-weight: 700;
+  letter-spacing: .2em;
   color: var(--c-accent);
   text-transform: uppercase;
   margin-bottom: 14px;
@@ -307,9 +311,9 @@ section {
 
 .section-jp {
   font-family: "Noto Serif JP", serif;
-  font-weight: 400;
+  font-weight: 700;
   font-size: clamp(24px, 3vw, 36px);
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   color: var(--c-ink);
   position: relative;
   display: inline-block;
@@ -319,13 +323,13 @@ section {
   content: '';
   display: block;
   width: 40px;
-  height: 1px;
+  height: 2px;
   background: var(--c-accent2);
   margin: 24px auto 0;
 }
 
 /* ============================================
-   FEATURES (4-grid)
+   FEATURES (3-grid)
    ============================================ */
 .features {
   background: var(--c-bg2);
@@ -344,19 +348,21 @@ section {
   padding: 48px 32px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
   transition: transform .4s, box-shadow .4s;
+  border: 1px solid var(--c-line);
 }
 
 .feature:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(229, 158, 178, 0.15);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.1);
 }
 
 .feature-num {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
   font-size: 14px;
-  letter-spacing: .3em;
+  letter-spacing: .2em;
   color: var(--c-accent2);
   margin-bottom: 16px;
 }
@@ -368,9 +374,9 @@ section {
 
 .feature h3 {
   font-family: "Noto Serif JP", serif;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 18px;
-  letter-spacing: .1em;
+  letter-spacing: .05em;
   line-height: 1.6;
   margin-bottom: 16px;
   color: var(--c-ink);
@@ -420,10 +426,10 @@ section {
 
 .split-text h2 {
   font-family: "Noto Serif JP", serif;
-  font-weight: 400;
+  font-weight: 700;
   font-size: clamp(24px, 2.6vw, 32px);
-  letter-spacing: .1em;
-  line-height: 1.6;
+  letter-spacing: .05em;
+  line-height: 1.5;
   margin-bottom: 24px;
   color: var(--c-ink);
 }
@@ -433,6 +439,98 @@ section {
   line-height: 2.2;
   color: var(--c-text);
   margin-bottom: 24px;
+}
+
+/* ============================================
+   PORTFOLIO (実績カード)
+   ============================================ */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.portfolio-card {
+  background: var(--c-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  transition: transform .3s, box-shadow .3s;
+  border: 1px solid var(--c-line);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.1);
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--c-bg2);
+}
+
+.portfolio-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.portfolio-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.portfolio-info h3 {
+  font-size: 18px;
+  color: var(--c-ink);
+  margin-bottom: 12px;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+}
+
+.portfolio-info p {
+  font-size: 13px;
+  color: var(--c-sub);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.portfolio-link {
+  font-size: 13px;
+  color: var(--c-accent);
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.portfolio-link:hover {
+  color: var(--c-accent2);
+}
+
+@media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================
@@ -450,7 +548,7 @@ section {
   background: var(--c-white);
   padding: 48px;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(229, 158, 178, 0.15);
+  box-shadow: 0 10px 40px rgba(37, 99, 235, 0.1);
 }
 
 .ai-banner-icon {
@@ -463,6 +561,7 @@ section {
   font-size: 24px;
   color: var(--c-ink);
   margin-bottom: 16px;
+  font-weight: 700;
 }
 
 .ai-banner-text {
@@ -477,7 +576,7 @@ section {
 .ai-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(74, 59, 63, .6);
+  background: rgba(15, 23, 42, .6);
   backdrop-filter: blur(4px);
   z-index: 9999;
   display: flex;
@@ -504,7 +603,7 @@ section {
   overflow: hidden;
   transform: translateY(20px);
   transition: all .4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
 }
 
 .ai-modal-overlay.open .ai-modal {
@@ -555,13 +654,14 @@ section {
 }
 
 @keyframes pulseAvatar {
-  0% { box-shadow: 0 0 0 0 rgba(229, 158, 178, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(229, 158, 178, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(229, 158, 178, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
 }
 
 .ai-header-text h3 {
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--c-ink);
   margin-bottom: 4px;
 }
@@ -708,7 +808,7 @@ section {
    ============================================ */
 .footer {
   background: var(--c-ink);
-  color: #fffafb;
+  color: #fff;
   padding: 80px 40px 32px;
 }
 
@@ -722,8 +822,9 @@ section {
 }
 
 .footer-logo {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 24px;
+  font-family: "Noto Serif JP", serif;
+  font-size: 20px;
+  font-weight: 700;
   margin-bottom: 16px;
 }
 
@@ -791,6 +892,7 @@ section {
     height: 300px;
   }
   
+  /* モバイルでアバターが潰れないように明示的な防潰し指定を適用 (RULE[AGENTS.md]) */
   .ai-live-avatar {
     flex-shrink: 0 !important;
     min-width: 50px !important;

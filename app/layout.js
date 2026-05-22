@@ -23,8 +23,8 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata = {
-  title: '那須ミッドシティホテル | 那須を動くための拠点ホテル',
-  description: '那須塩原駅徒歩3分、無料駐車場完備。観光の出張・温泉巡りや周辺エリアへの移動に便利な、那須の拠点となるホテルです。',
+  title: 'サクセス研究社 | BtoC店舗専門のAI導入支援・AIエージェントマネージャー養成スクール',
+  description: '栃木県那須塩原市のサクセス研究社。店舗ビジネスに特化したAIコンシェルジュの導入設計、自動応答による予約こぼし削減、AIエージェントマネージャー養成スクールを運営。',
 };
 
 export default function RootLayout({ children }) {

@@ -1,6 +1,6 @@
 // ===================================================
-// サロン・ド・ビューティー AIコンシェルジュ バックエンド (Next.js App Router)
-// 【美容室専用・RAG・Gemini API・複数音声出し分け版】
+// サクセス研究社 AI導入コンサルティング バックエンド (Next.js App Router)
+// 【店舗系支援・RAG・Gemini API・複数音声出し分け版】
 // ===================================================
 
 import { NextResponse } from 'next/server';
@@ -74,28 +74,26 @@ function loadSalonKnowledge() {
 
   if (!knowledge) {
     knowledge = `
-【サロン・ド・ビューティー（Salon de Beauty）の基本情報】
-・店舗名：Salon de Beauty (サロン・ド・ビューティー)
-・特徴：くせ毛特化の髪質改善専門サロンです。長年のくせ毛、広がり、パサつきなどの髪のお悩みを根本から解決します。
-・AIコンシェルジュ：さくら（Sakura）🌸
-・住所：〒150-0001 東京都渋谷区神宮前1-2-3 ビューティービル 2F
-・アクセス：東京メトロ表参道駅 A2出口より徒歩3分
-・営業時間：10:00 〜 20:00（最終受付 18:00）
-・定休日：毎週火曜日
-・電話番号：03-1234-5678
+【サクセス研究社の基本情報】
+・会社名：サクセス研究社
+・代表者：田代 稔 (たしろ みのる)
+・肩書：AI導入コンサルタント、AIエージェントマネージャー、AIエージェントマネージャー養成スクール校長
+・住所：〒325-0026 栃木県那須塩原市上厚崎578-30
+・メールアドレス：success.kks.ai@gmail.com
+・お問い合わせフォーム：https://ssgform.com/s/3TQ1jL8kw53N
+・事業内容：BtoC店舗系（美容室、整体院、飲食店、自動車販売等）へのAIエージェント（AIコンシェルジュ）導入コンサルティング、および自社でAIエージェントを運用できる人材を育成する「AIエージェントマネージャー養成スクール」の運営。
 
-【メニュー・料金（税込）】
-・プレミアム髪質改善エステ（人気No.1看板メニュー）：
-  - 料金：22,000円（税込）
-  - 施術時間：約180分
-  - 特徴：従来の縮毛矯正とは異なり、特殊なトリートメント成分を髪の深部まで浸透させながらクセを優しく伸ばし、乾かすだけでまとまる艶髪にします。
+【提供サービス（税込）】
+・AIエージェント導入コンサルティング：個別お見積もり（初回オンライン無料相談実施中）。24時間稼働のAI応答システムをWebサイトに組み込みます。
+・AIエージェントマネージャー養成スクール：説明会にて個別にご案内。ノーコードでAIエージェントの構築や運用ができる人材を育成します。
 
-【よくある質問への対応】
-・くせ毛対応：何千人ものくせ毛に悩むお客様を施術してきた「くせ毛特化 of 独自メソッド」があるため、どんなにガンコなくせ毛やうねりでも自然で艶やかなストレートに導くことができます。
-・髪のダメージ：髪の状態に合わせて薬剤をオーダーメイドで調合し、ダメージを最小限に抑えながら施術します。
-・予約方法：ホットペッパービューティーからの「WEB予約」が可能です。またはお電話（03-1234-5678）でも承っております。
-・施術環境：最初から最後まで一人のスタイリストが完全マンツーマンで担当するプライベート空間ですので、リラックスして施術を受けられます。
-・駐車場：当サロン専用の無料駐車場はございません。お車でお越しの際は近隣の有料コインパーキングをご利用いただくか、表参道駅から徒歩3分ですので公共交通機関のご利用をおすすめします。
+【AIエージェント導入実績】
+・サロンドビューティー AIコンシェルジュ (https://salon-ai-lp.netlify.app/)
+・adtown診断 (https://adtownshindan.netlify.app/)
+・沼井農園 (https://numainoen.netlify.app/)
+・Hikarino休日 (https://hikarino-seitai.netlify.app/)
+・自動車販売 (https://zidosyahanbai.netlify.app/)
+・ラーメンHP (https://ramenhp.netlify.app/)
 `;
   }
   return knowledge;
@@ -109,6 +107,11 @@ function optimizeTextForSpeech(text, isEnglish = false) {
   
   // 1. Specific phrases/words
   optimized = optimized.replace(/AI/gi, 'エーアイ');
+  optimized = optimized.replace(/サクセス研究社/g, 'サクセスケンキュウシャ');
+  optimized = optimized.replace(/田代\s*稔/g, 'タシロミノル');
+  optimized = optimized.replace(/AI導入コンサルタント/g, 'エーアイどうにゅうコンサルタント');
+  optimized = optimized.replace(/AIエージェントマネージャー/g, 'エーアイエージェントマネージャー');
+  optimized = optimized.replace(/養成スクール/g, 'ようせいスクール');
   optimized = optimized.replace(/Salon de Beauty/gi, 'サロンドビューティー');
   optimized = optimized.replace(/Hot Pepper Beauty/gi, 'ホットペッパービューティー');
   optimized = optimized.replace(/WEB予約/gi, 'ウェブよやく');
@@ -118,8 +121,17 @@ function optimizeTextForSpeech(text, isEnglish = false) {
   optimized = optimized.replace(/Next\.js/gi, 'ネクストジェーエス');
   optimized = optimized.replace(/Netlify/gi, 'ネットリファイ');
   optimized = optimized.replace(/URL/gi, 'ユーアールエル');
-  optimized = optimized.replace(/スタッフ一同心よりお待ちしております/g, 'スタッフ一同、心よりお待ちしております');
   
+  // 実績名
+  optimized = optimized.replace(/adtown診断/g, 'アドタウンシンダン');
+  optimized = optimized.replace(/沼井農園/g, 'ヌマイノウエン');
+  optimized = optimized.replace(/Hikarino休日/g, 'ヒカリノキュウジツ');
+  optimized = optimized.replace(/自動車販売/g, 'ジドウシャハンバイ');
+  optimized = optimized.replace(/ラーメンHP/g, 'ラーメンホームページ');
+
+  // URLを読み上げから除外
+  optimized = optimized.replace(/https?:\/\/[\w!\?/\+\-_~=;\.,\*&@#\$%\(\)'"\+]+/g, ' ');
+
   // 2. Numbers, times and rates
   optimized = optimized.replace(/10:00/g, '十時');
   optimized = optimized.replace(/20:00/g, '二十時');
@@ -132,7 +144,6 @@ function optimizeTextForSpeech(text, isEnglish = false) {
   optimized = optimized.replace(/➔/g, ' ');
   
   // 4. Prices and currency symbols
-  optimized = optimized.replace(/22,000円/g, 'にまんにせんえん');
   optimized = optimized.replace(/¥/g, '');
   optimized = optimized.replace(/,/g, '');
   
@@ -142,7 +153,9 @@ function optimizeTextForSpeech(text, isEnglish = false) {
   
   // 6. Phone number & address hyphens
   optimized = optimized.replace(/03-1234-5678/g, 'れいさん、いちにーさんよん、ごーろくななはち');
-  optimized = optimized.replace(/1-2-3/g, 'いちの、にの、さん');
+  optimized = optimized.replace(/325-0026/g, 'さんにいごの、れいれいにーろく');
+  optimized = optimized.replace(/578-30/g, 'ごーななはちの、さんじゅう');
+  optimized = optimized.replace(/那須塩原市上厚崎/g, 'ナスシオバラシカミアツサキ');
   
   // 7. General cleanup of emojis and brackets
   optimized = optimized.replace(/[【】「」()（）『』\[\]]/g, '');
@@ -167,44 +180,42 @@ async function generateGeminiResponse(userText, isEnglish) {
   if (!apiKey) {
     console.error("[Backend Gemini] GEMINI_API_KEY is missing in .env");
     return isEnglish
-      ? "I apologize, but my system is currently unavailable. Please contact the salon staff."
-      : "申し訳ございません。システムエラーが発生しているため、店舗までお電話（03-1234-5678）にてお問い合わせください。";
+      ? "I apologize, but my system is currently unavailable. Please contact the consultant team."
+      : "申し訳ございません。システムエラーが発生しているため、サクセス研究社のお問い合わせページまたはメール（success.kks.ai@gmail.com）にてお問い合わせください。";
   }
 
   const SALON_KNOWLEDGE = loadSalonKnowledge();
 
   const SYSTEM_INSTRUCTION_JA = `
-あなたは髪質改善専門美容室「Salon de Beauty（サロン・ド・ビューティー）」の公式AIコンシェルジュ「さくら」です。
-くせ毛やパサつきなど、髪に悩みを持つお客様に対して、親密になってフレンドリーかつ丁寧な日本語で回答してください。
-語尾には「です🌸」「ます🌸」などを自然に使用し、親しみやすく明るい雰囲気を出してください。
+あなたはサクセス研究社の代表であり、AI導入コンサルタント、AIエージェントマネージャー養成スクール校長を務める「田代 稔 (たしろ みのる)」をモデルにした公式AIエージェントです。
+店舗のAI導入やスクールに興味をお持ちのお客様に対し、親切で知的、かつ信頼感のあるビジネス丁寧語（「です」「ます」調）で回答してください。
+親しみやすさを持ちつつ、プロフェッショナルとしての説得力がある口調を心がけてください。
 
 【回答における絶対ルール】
-1. 提供された【サロンナレッジ】に記載されている情報のみに基づいて回答してください。
-2. 【サロンナレッジ】に記載のない情報については、絶対に勝手に推測したり、嘘の情報を創作して回答しないでください。
-3. ナレッジに記載がないこと、あるいは答えられない質問（例：具体的な予約の空き状況の確認や、スタイリスト個人の指名料など）に対しては、曖昧に答えず、一律で以下のように回答して、店舗への電話やWEB予約に誘導してください：
-   - 「ご質問ありがとうございます。その件につきましては、スタッフが詳しくご案内いたします。お電話は、03-1234-5678 までいつでもお気軽にお問い合わせくださいね🌸」
-   - 「申し訳ありません、その質問にはお答えできかねます。詳しい内容につきましては、店舗（03-1234-5678）までお気軽にお問い合わせくださいませ🌸」
+1. 提供された【ナレッジ】に記載されている情報のみに基づいて回答してください。
+2. 【ナレッジ】に記載のない情報については、絶対に勝手に推測したり、嘘の情報を創作して回答しないでください。
+3. ナレッジに記載がないこと、あるいは答えられない質問に対しては、一律で以下のように回答して、公式のお問い合わせ入力ページやメールアドレスに誘導してください：
+   - 「ご質問ありがとうございます。その件につきましては、代表の田代、またはスタッフが詳しくご案内いたします。詳細につきましては、お問い合わせ入力ページ（https://ssgform.com/s/3TQ1jL8kw53N）またはメール（success.kks.ai@gmail.com）までいつでもお気軽にお問い合わせください。」
 4. 回答は簡潔に、100〜150文字程度で分かりやすくまとめてください。
-5. 音声合成（TTS）で読み上げるため、余計な記号や絵文字（🌸は除く）は最小限にし、読みやすい自然な日本語にしてください。
+5. 音声合成（TTS）で読み上げるため、余計な記号や絵文字は最小限にしてください。
 `;
 
   const SYSTEM_INSTRUCTION_EN = `
-You are "Sakura", the official AI concierge of the hair salon "Salon de Beauty".
-Please answer the user's questions in a friendly, polite, and welcoming tone in English.
-Try to use "🌸" naturally in your response to show your friendly personality.
+You are the official AI agent modeled after Minoru Tashiro, the representative of Success Kenkyusha and AI implementation consultant.
+Please answer the user's questions in a friendly, polite, and professional business tone in English.
 
 [Absolute Rules for Answering]
-1. Answer the question based ONLY on the provided [Salon Knowledge].
-2. Do NOT guess, assume, or create any information that is not explicitly written in the [Salon Knowledge].
-3. For any questions where the information is not in the [Salon Knowledge], or if you cannot answer, reply with:
-   "Thank you for your question. Our staff will be happy to assist you in detail. Please feel free to call us at +81-3-1234-5678 anytime!🌸"
+1. Answer the question based ONLY on the provided [Success Kenkyusha Knowledge].
+2. Do NOT guess, assume, or create any information that is not explicitly written in the [Knowledge].
+3. For any questions where the information is not in the [Knowledge], or if you cannot answer, reply with:
+   "Thank you for your question. Our team will be happy to assist you in detail. Please feel free to contact us via the contact page (https://ssgform.com/s/3TQ1jL8kw53N) or email (success.kks.ai@gmail.com) anytime."
 4. Keep the answer concise (about 30-50 words).
-5. Minimize extra symbols or emojis (except 🌸) so that Text-to-Speech reads it naturally.
+5. Minimize extra symbols or emojis so that Text-to-Speech reads it naturally.
 `;
 
   const systemInstruction = isEnglish ? SYSTEM_INSTRUCTION_EN : SYSTEM_INSTRUCTION_JA;
   const promptText = `
-【サロンナレッジ】
+【ナレッジ】
 ${SALON_KNOWLEDGE}
 
 【ユーザーからの質問】
@@ -282,8 +293,8 @@ ${userText}
   }
 
   return isEnglish
-    ? "Thank you for your question. Our staff will be happy to assist you in detail. Please feel free to call us at +81-3-1234-5678 anytime!🌸"
-    : "ご質問ありがとうございます。その件につきましては、スタッフが喜んで詳しくご案内いたします。お電話は、03-1234-5678 まで、いつでもお気軽にお問い合わせくださいね🌸";
+    ? "Thank you for your question. Our team will be happy to assist you in detail. Please feel free to contact us via the contact page (https://ssgform.com/s/3TQ1jL8kw53N) or email (success.kks.ai@gmail.com) anytime."
+    : "ご質問ありがとうございます。その件につきましては、代表の田代、またはスタッフが詳しくご案内いたします。詳細につきましては、お問い合わせ入力ページ（https://ssgform.com/s/3TQ1jL8kw53N）またはメール（success.kks.ai@gmail.com）までいつでもお気軽にお問い合わせください。";
 }
 
 // ==========================================
@@ -305,7 +316,7 @@ async function generateGcpTts(text, voiceName, languageCode) {
   };
   
   if (!voiceName.toLowerCase().includes('chirp')) {
-    audioConfig.pitch = 4.0; 
+    audioConfig.pitch = 0.0; // 男性音声なのでピッチ調整を元に戻す(または適切なピッチに設定)
   }
 
   const gcpReq = {
@@ -353,15 +364,16 @@ async function ensureGreetingAudios() {
     fs.mkdirSync(publicDir, { recursive: true });
   }
 
-  const jaGreetingText = 'こんにちは！サロン・ド・ビューティーのAIコンシェルジュ、さくらです。くせ毛のお悩みやメニューについて、何でもお聞きくださいね。';
-  const enGreetingText = "Hello! I'm Sakura, the AI concierge of Salon de Beauty. Please feel free to ask about our hair care menu, frizzy hair concerns, or anything else.";
+  const jaGreetingText = 'こんにちは！サクセス研究社の代表、AI導入コンサルタントの田代稔です。店舗へのAIエージェント導入や、AIエージェントマネージャー養成スクールについて、何でもお気軽にご質問くださいね。';
+  const enGreetingText = "Hello! I am Minoru Tashiro, the representative of Success Kenkyusha and AI implementation consultant. Please feel free to ask about introducing AI agents to your store or our training school.";
 
   if (!fs.existsSync(jaPath)) {
     console.log("[Backend Initialize] Generating static greeting_ja.mp3...");
     try {
-      let audio = await generateGcpTts(jaGreetingText, 'ja-JP-Chirp3-HD-Aoede', 'ja-JP');
+      // 男性デフォルトボイス「ja-JP-Chirp3-HD-Sadachbia」
+      let audio = await generateGcpTts(jaGreetingText, 'ja-JP-Chirp3-HD-Sadachbia', 'ja-JP');
       
-      // GCP TTS が失敗した場合は VOICEVOX (スピーカーID: 2 = 四国めたん) を試す
+      // GCP TTS が失敗した場合は VOICEVOX (スピーカーID: 13 = 青山龍星) を試す
       if (!audio) {
         const voicevoxKeys = [
           process.env.VOICEVOX_API_KEY_1,
@@ -372,7 +384,7 @@ async function ensureGreetingAudios() {
         console.log("[Backend Initialize] Static greeting: falling back to VOICEVOX.");
         for (let i = 0; i < voicevoxKeys.length; i++) {
           try {
-            audio = await getVoicevoxAudioV1(optimizeTextForSpeech(jaGreetingText, false), 2, voicevoxKeys[i]);
+            audio = await getVoicevoxAudioV1(optimizeTextForSpeech(jaGreetingText, false), 13, voicevoxKeys[i]);
             console.log("[Backend Initialize] VOICEVOX Success for greeting with Key #" + (i + 1));
             break;
           } catch (err) {
@@ -395,7 +407,8 @@ async function ensureGreetingAudios() {
   if (!fs.existsSync(enPath)) {
     console.log("[Backend Initialize] Generating static greeting_en.mp3...");
     try {
-      const audio = await generateGcpTts(enGreetingText, 'en-US-Chirp3-HD-Aoede', 'en-US');
+      // 英語男性ボイス「en-US-Chirp3-HD-Umbriel」
+      const audio = await generateGcpTts(enGreetingText, 'en-US-Chirp3-HD-Umbriel', 'en-US');
       if (audio) {
         fs.writeFileSync(enPath, Buffer.from(audio, 'base64'));
         console.log("[Backend Initialize] Saved greeting_en.mp3 successfully.");
@@ -416,7 +429,7 @@ export async function POST(req) {
     await ensureGreetingAudios();
 
     const body = await req.json();
-    const { text = '', voice = 'ja-JP-Chirp3-HD-Aoede', ttsOnly = false, textOnly = false } = body;
+    const { text = '', voice = 'ja-JP-Chirp3-HD-Sadachbia', ttsOnly = false, textOnly = false } = body;
 
     if (!text) {
       return NextResponse.json({ error: 'Text required' }, { status: 400, headers: corsHeaders });
@@ -441,12 +454,12 @@ export async function POST(req) {
     console.log(`[Backend TTS] Synthesizing for voice: ${voice}`);
     let audioContent = await generateGcpTts(speechReadyText, voice, languageCode);
 
-    // GCP TTS が失敗した場合は VOICEVOX (日本語のみ) を試す
+    // GCP TTS が失敗した場合は VOICEVOX (日本語のみ・男性青山龍星など) を試す
     if (!audioContent && !isEnglish) {
-      let voicevoxSpeaker = 2;
+      let voicevoxSpeaker = 13; // 青山龍星
       const vLower = voice.toLowerCase();
-      if (vLower.includes('achernar') || vLower.includes('aoi')) voicevoxSpeaker = 8;
-      else if (vLower.includes('zephyr') || vLower.includes('mei')) voicevoxSpeaker = 10;
+      if (vLower.includes('alnilam')) voicevoxSpeaker = 13;
+      else if (vLower.includes('sadachbia')) voicevoxSpeaker = 7; // 記者
 
       const voicevoxKeys = [
         process.env.VOICEVOX_API_KEY_1,
