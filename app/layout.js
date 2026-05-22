@@ -23,8 +23,8 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata = {
-  title: 'サクセス研究社 | BtoC店舗専門のAI導入支援・AIエージェントマネージャー養成スクール',
-  description: '栃木県那須塩原市のサクセス研究社。店舗ビジネスに特化したAIコンシェルジュの導入設計、自動応答による予約こぼし削減、AIエージェントマネージャー養成スクールを運営。',
+  title: 'Salon de Beauty | くせ毛特化の髪質改善ヘアサロン',
+  description: '東京メトロ表参道駅徒歩3分。長年のくせ毛、広がり、パサつきのお悩みを根本から解決。当サロン独自の髪質改善エステで、乾かすだけでまとまる美しい髪へ導きます。24時間対応のAIコンシェルジュがお悩みにお答えします。',
 };
 
 export default function RootLayout({ children }) {
