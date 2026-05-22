@@ -287,6 +287,70 @@ ${userText}
 }
 
 // ==========================================
+// OpenAI TTS (Audio API) 連携音声合成関数
+// ==========================================
+function mapVoiceToOpenAi(voiceName) {
+  const v = voiceName.toLowerCase();
+  if (v.includes('aoede') || v.includes('shimmer') || v.includes('neural2-f')) {
+    return 'shimmer'; // 明るく上品
+  }
+  if (v.includes('zephyr') || v.includes('nova') || v.includes('kore')) {
+    return 'nova'; // ふんわり愛らしい
+  }
+  if (v.includes('achernar') || v.includes('alloy') || v.includes('neural2-h')) {
+    return 'alloy'; // しっとり落ち着いた
+  }
+  return 'shimmer'; // デフォルト
+}
+
+async function generateOpenAiTts(text, voiceName) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    console.error("[Backend TTS] OPENAI_API_KEY is missing in env");
+    return null;
+  }
+
+  const openAiVoice = mapVoiceToOpenAi(voiceName);
+  const openAiUrl = 'https://api.openai.com/v1/audio/speech';
+
+  const reqBody = {
+    model: 'tts-1',
+    input: text,
+    voice: openAiVoice,
+    response_format: 'mp3'
+  };
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(openAiUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reqBody),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    if (response.ok) {
+      const arrayBuffer = await response.arrayBuffer();
+      return Buffer.from(arrayBuffer).toString('base64');
+    } else {
+      const errText = await response.text();
+      console.error("[Backend TTS] OpenAI TTS Error:", errText);
+      return null;
+    }
+  } catch (err) {
+    console.error("[Backend TTS] OpenAI TTS fetch failed or timed out:", err);
+    return null;
+  }
+}
+
+// ==========================================
 // Google Cloud TTS 連携音声合成関数
 // ==========================================
 async function generateGcpTts(text, voiceName, languageCode) {
@@ -359,7 +423,13 @@ async function ensureGreetingAudios() {
   if (!fs.existsSync(jaPath)) {
     console.log("[Backend Initialize] Generating static greeting_ja.mp3...");
     try {
-      let audio = await generateGcpTts(jaGreetingText, 'ja-JP-Chirp3-HD-Aoede', 'ja-JP');
+      let audio = null;
+      if (process.env.OPENAI_API_KEY) {
+        audio = await generateOpenAiTts(jaGreetingText, 'ja-JP-Chirp3-HD-Aoede');
+      }
+      if (!audio) {
+        audio = await generateGcpTts(jaGreetingText, 'ja-JP-Chirp3-HD-Aoede', 'ja-JP');
+      }
       
       // GCP TTS が失敗した場合は VOICEVOX (スピーカーID: 2 = 四国めたん) を試す
       if (!audio) {
@@ -395,7 +465,13 @@ async function ensureGreetingAudios() {
   if (!fs.existsSync(enPath)) {
     console.log("[Backend Initialize] Generating static greeting_en.mp3...");
     try {
-      const audio = await generateGcpTts(enGreetingText, 'en-US-Chirp3-HD-Aoede', 'en-US');
+      let audio = null;
+      if (process.env.OPENAI_API_KEY) {
+        audio = await generateOpenAiTts(enGreetingText, 'en-US-Chirp3-HD-Aoede');
+      }
+      if (!audio) {
+        audio = await generateGcpTts(enGreetingText, 'en-US-Chirp3-HD-Aoede', 'en-US');
+      }
       if (audio) {
         fs.writeFileSync(enPath, Buffer.from(audio, 'base64'));
         console.log("[Backend Initialize] Saved greeting_en.mp3 successfully.");
@@ -439,7 +515,13 @@ export async function POST(req) {
     const languageCode = isEnglish ? 'en-US' : 'ja-JP';
 
     console.log(`[Backend TTS] Synthesizing for voice: ${voice}`);
-    let audioContent = await generateGcpTts(speechReadyText, voice, languageCode);
+    let audioContent = null;
+    if (process.env.OPENAI_API_KEY) {
+      audioContent = await generateOpenAiTts(speechReadyText, voice);
+    }
+    if (!audioContent) {
+      audioContent = await generateGcpTts(speechReadyText, voice, languageCode);
+    }
 
     // GCP TTS が失敗した場合は VOICEVOX (日本語のみ) を試す
     if (!audioContent && !isEnglish) {
