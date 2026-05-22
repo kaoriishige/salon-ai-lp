@@ -745,7 +745,10 @@ export default function Home() {
             <p className="ai-banner-text" style={{ textAlign: 'left', marginBottom: '24px', fontSize: '15px', lineHeight: '1.8' }}>
               「私の髪質でも効果ある？」「どのメニューを選べばいい？」<br />
               24時間いつでも、当サロンのAIコンシェルジュ「さくら」がお答えします。<br />
-              音声でもテキストでも、お気軽に質問してください。
+              音声でもテキストでも、お気軽に質問してください。<br />
+              <span style={{ display: 'block', marginTop: '12px', fontSize: '13px', color: 'var(--c-accent)', fontWeight: 'bold' }}>
+                ※こちらは参考デモ版になっております。本番の場合は、美容室の情報をAIに登録して、その内容をもとに、AIコンシェルジュがお客様と会話をして、予約に導きます。
+              </span>
             </p>
             <button onClick={openModal} className="btn primary" style={{ borderRadius: '30px', fontSize: '16px', padding: '16px 40px', boxShadow: '0 4px 15px rgba(229, 158, 178, 0.4)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
@@ -927,6 +930,11 @@ export default function Home() {
                 <option value="1.5">{UI_TEXT[currentLang].speedFastest}</option>
               </select>
             </div>
+          </div>
+
+          <div style={{ background: '#fff9fa', borderBottom: '1px solid #fce3e8', padding: '12px 24px', fontSize: '12px', color: '#c85a73', lineHeight: '1.5' }}>
+            <strong>💡 お知らせ（参考デモ版）</strong><br />
+            こちらは、参考デモ版になっております。本番の場合は、美容室の情報をAIに登録して、その内容をもとに、AIコンシェルジュがお客様と会話をして、予約に導きます。
           </div>
 
           <div className="ai-chat-body" ref={chatBodyRef}>
